@@ -122,10 +122,6 @@ class App extends Component<Props, State> {
 
     return (
       <div className="App" style={{ display: "flex", height: "100vh" }}>
-        <Sidebar
-          highlights={highlights}
-          resetHighlights={this.resetHighlights}
-        />
         <div
           style={{
             height: "100vh",
@@ -209,6 +205,11 @@ class App extends Component<Props, State> {
             )}
           </PdfLoader>
         </div>
+
+        <Sidebar
+          highlights={highlights}
+          resetHighlights={this.resetHighlights}
+        />
       </div>
     );
   }
