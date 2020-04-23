@@ -70,7 +70,7 @@ class Tip extends Component<Props, State> {
                 }}
               />
               <div>
-                {["💩", "😱", "😍", "🔥", "😳", "⚠️"].map(_emoji => (
+                {["🔥", "⚠️"].map(_emoji => (
                   <label key={_emoji}>
                     <input
                       checked={emoji === _emoji}
