@@ -37,6 +37,9 @@ class TipContainer extends Component<Props, State> {
   updatePosition = () => {
     const { container } = this.refs;
 
+    if (container === undefined) {
+      return;
+    }
     const { offsetHeight, offsetWidth } = container;
 
     this.setState({
