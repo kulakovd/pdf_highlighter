@@ -54,9 +54,12 @@ const DEFAULT_URL = "https://arxiv.org/pdf/1708.08021.pdf";
 const searchParams = new URLSearchParams(document.location.search);
 const url = searchParams.get("url") || DEFAULT_URL;
 
+let item = localStorage.getItem(url);
+
 class App extends Component<Props, State> {
+
   state = {
-    highlights: testHighlights[url] ? [...testHighlights[url]] : []
+    highlights: item? JSON.parse(item)? [... JSON.parse(item)] : []:[]
   };
 
   state: State;
@@ -96,6 +99,7 @@ class App extends Component<Props, State> {
 
     console.log("Saving highlight", highlight);
 
+    localStorage.setItem(url,JSON.stringify(highlight))
     this.setState({
       highlights: [{ ...highlight, id: getNextId() }, ...highlights]
     });
@@ -119,7 +123,7 @@ class App extends Component<Props, State> {
 
   render() {
     const { highlights } = this.state;
-
+    localStorage.setItem(url, highlights)
     return (
       <div className="App" style={{ display: "flex", height: "100vh" }}>
         <div
