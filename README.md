@@ -65,3 +65,7 @@ Please check the [CORS headers](https://developer.mozilla.org/en-US/docs/Web/HTT
 
 Works in Google Chrome, Safari 10+, Firefox 52+. Not tested in Internet
 Explorer.
+#Helper commands
+https://localhost:3000/?url=https://192.168.0.103:8080/example/file.pdf
+
+http-server --ssl -C cert.pem -o --cors -a localhost
