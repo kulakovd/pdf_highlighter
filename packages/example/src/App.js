@@ -49,7 +49,7 @@ const HighlightPopup = ({ comment }) =>
     </div>
   ) : null;
 
-const DEFAULT_URL = "http://www.africau.edu/images/default/sample.pdf";
+const DEFAULT_URL = "https://arxiv.org/pdf/1708.08021.pdf";
 
 const searchParams = new URLSearchParams(document.location.search);
 const url = searchParams.get("url") || DEFAULT_URL;
