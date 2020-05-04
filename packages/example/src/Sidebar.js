@@ -53,7 +53,7 @@ function Sidebar({ highlights, resetHighlights }: Props) {
               ) : null}
             </div>
             <div className="highlight__location">
-              Page {highlight.position.pageNumber}
+              Страница {highlight.position.pageNumber}
             </div>
           </li>
         ))}
