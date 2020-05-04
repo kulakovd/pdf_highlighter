@@ -18,18 +18,11 @@ function Sidebar({ highlights, resetHighlights }: Props) {
   return (
     <div className="sidebar" style={{ width: "25vw" }}>
       <div className="description" style={{ padding: "1rem" }}>
-        <h2 style={{ marginBottom: "1rem" }}>react-pdf-highlighter</h2>
-
-        <p style={{ fontSize: "0.7rem" }}>
-          <a href="https://github.com/agentcooper/react-pdf-highlighter">
-            Open in GitHub
-          </a>
-        </p>
-
+        <h2 style={{ marginBottom: "1rem" }}>Ваши комментарии</h2>
         <p>
           <small>
-            To create area highlight hold ⌥ Option key (Alt), then click and
-            drag.
+            Для выделения области на документе нажмите и удерживайте кнопку Alt
+            во время выделения
           </small>
         </p>
       </div>

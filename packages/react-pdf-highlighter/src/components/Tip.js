@@ -46,7 +46,7 @@ class Tip extends Component<Props, State> {
               this.setState({ compact: false });
             }}
           >
-            Add highlight
+            Добавить комментарий
           </div>
         ) : (
           <form
@@ -59,7 +59,7 @@ class Tip extends Component<Props, State> {
             <div>
               <textarea
                 width="100%"
-                placeholder="Your comment"
+                placeholder="Ваш комментарий"
                 autoFocus
                 value={text}
                 onChange={event => this.setState({ text: event.target.value })}
@@ -87,7 +87,7 @@ class Tip extends Component<Props, State> {
               </div>
             </div>
             <div>
-              <input type="submit" value="Save" />
+              <input type="submit" value="Сохранить" />
             </div>
           </form>
         )}
