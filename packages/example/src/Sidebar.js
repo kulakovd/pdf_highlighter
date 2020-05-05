@@ -60,7 +60,7 @@ function Sidebar({ highlights, resetHighlights }: Props) {
       </ul>
       {highlights.length > 0 ? (
         <div style={{ padding: "1rem" }}>
-          <button onClick={resetHighlights}>Reset highlights</button>
+          <button onClick={resetHighlights}>Сбросить</button>
         </div>
       ) : null}
     </div>
