@@ -227,20 +227,21 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     };
   }
 
-  rotate() {
-    const currentPage = this.viewer.currentPageNumber()
+  rotate(rotate) {
+    const currentPage = this.viewer._currentPageNumber;
     const canvas = this.viewer.getPageView(currentPage - 1).canvas
-    canvas.style.transform = "rotate(90deg)";
+    canvas.style.transform = rotate?"rotate(90deg)":"rotate(0deg)";
   }
 
   screenshot(position: T_LTWH, pageNumber: number) {
     const canvas = this.viewer.getPageView(pageNumber - 1).canvas;
-    // canvas.style.transform = "rotate(90deg)";
     return getAreaAsPng(canvas, position);
   }
 
   renderHighlights(nextProps?: Props<T_HT>) {
-    const { highlightTransform, highlights } = nextProps || this.props;
+    const { highlightTransform, highlights, rotate } = nextProps || this.props;
+
+    this.rotate(rotate);
 
     const { pdfDocument } = this.props;
 
