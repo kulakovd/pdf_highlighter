@@ -53,7 +53,8 @@ type State<T_HT> = {
     callback: (highlight: T_ViewportHighlight<T_HT>) => React$Element<*>
   },
   isAreaSelectionInProgress: boolean,
-  scrolledToHighlightId: string
+  scrolledToHighlightId: string,
+  rotate: boolean
 };
 
 type Props<T_HT> = {
@@ -79,7 +80,8 @@ type Props<T_HT> = {
     hideTipAndSelection: () => void,
     transformSelection: () => void
   ) => ?React$Element<*>,
-  enableAreaSelection: (event: MouseEvent) => boolean
+  enableAreaSelection: (event: MouseEvent) => boolean,
+  rotate: boolean
 };
 
 const EMPTY_ID = "empty-id";
@@ -94,7 +96,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     range: null,
     scrolledToHighlightId: EMPTY_ID,
     isAreaSelectionInProgress: false,
-    tip: null
+    tip: null,
+    rotate: false
   };
 
   viewer: T_PDFJS_Viewer;
@@ -124,6 +127,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     });
 
     this.viewer.setDocument(pdfDocument);
+
     this.linkService.setDocument(pdfDocument);
     this.linkService.setViewer(this.viewer);
 
@@ -223,9 +227,15 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     };
   }
 
+  rotate() {
+    const currentPage = this.viewer.currentPageNumber()
+    const canvas = this.viewer.getPageView(currentPage - 1).canvas
+    canvas.style.transform = "rotate(90deg)";
+  }
+
   screenshot(position: T_LTWH, pageNumber: number) {
     const canvas = this.viewer.getPageView(pageNumber - 1).canvas;
-
+    // canvas.style.transform = "rotate(90deg)";
     return getAreaAsPng(canvas, position);
   }
 
@@ -275,7 +285,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                   rect => {
                     const viewport = this.viewer.getPageView(pageNumber - 1)
                       .viewport;
-
                     return viewportToScaled(rect, viewport);
                   },
                   boundingRect => this.screenshot(boundingRect, pageNumber),

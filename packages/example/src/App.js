@@ -59,18 +59,28 @@ let item = localStorage.getItem(url);
 class App extends Component<Props, State> {
 
   state = {
-    highlights: item? JSON.parse(item)? [... JSON.parse(item)] : []:[]
+    highlights: item ? JSON.parse(item) ? [...JSON.parse(item)] : [] : [],
+    rotate: false
   };
 
   state: State;
 
   resetHighlights = () => {
     this.setState({
-      highlights: []
+      ...this.state, highlights: []
     });
+    console.log(this.state)
   };
 
-  scrollViewerTo = (highlight: any) => {};
+  rotate = () => {
+    this.setState({
+      ...this.state, rotate: !this.state.rotate
+    });
+    console.log(this.state)
+  };
+
+  scrollViewerTo = (highlight: any) => {
+  };
 
   scrollToHighlightFromHash = () => {
     const highlight = this.getHighlightById(parseIdFromHash());
@@ -99,7 +109,7 @@ class App extends Component<Props, State> {
 
     console.log("Saving highlight", highlight);
 
-    localStorage.setItem(url,JSON.stringify(highlight))
+    localStorage.setItem(url, JSON.stringify(highlight));
     this.setState({
       highlights: [{ ...highlight, id: getNextId() }, ...highlights]
     });
@@ -112,18 +122,18 @@ class App extends Component<Props, State> {
       highlights: this.state.highlights.map(h => {
         return h.id === highlightId
           ? {
-              ...h,
-              position: { ...h.position, ...position },
-              content: { ...h.content, ...content }
-            }
+            ...h,
+            position: { ...h.position, ...position },
+            content: { ...h.content, ...content }
+          }
           : h;
       })
     });
   }
 
   render() {
-    const { highlights } = this.state;
-    localStorage.setItem(url, highlights)
+    const { highlights, rotate } = this.state;
+    localStorage.setItem(url, highlights);
     return (
       <div className="App" style={{ display: "flex", height: "100vh" }}>
         <div
@@ -134,10 +144,11 @@ class App extends Component<Props, State> {
             position: "relative"
           }}
         >
-          <PdfLoader url={url} beforeLoad={<Spinner />}>
+          <PdfLoader url={url} beforeLoad={<Spinner/>}>
             {pdfDocument => (
               <PdfHighlighter
                 pdfDocument={pdfDocument}
+                rotate={rotate}
                 enableAreaSelection={event => event.altKey}
                 onScrollChange={resetHash}
                 scrollRef={scrollTo => {
@@ -213,6 +224,7 @@ class App extends Component<Props, State> {
         <Sidebar
           highlights={highlights}
           resetHighlights={this.resetHighlights}
+          rotate={this.rotate}
         />
       </div>
     );
