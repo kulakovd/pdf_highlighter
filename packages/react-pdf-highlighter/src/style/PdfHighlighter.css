@@ -20,3 +20,12 @@
   user-select: none;
   pointer-events: none;
 }
+
+.PdfHighlighter__rotated {
+  -webkit-transform : rotate(90deg) scale(0.7);
+  -moz-transform : rotate(90deg) scale(0.7);
+  -ms-transform : rotate(90deg) scale(0.7);
+  -o-transform : rotate(90deg) scale(0.7);
+  transform : rotate(90deg) scale(0.7);
+}
+

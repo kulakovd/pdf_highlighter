@@ -228,9 +228,14 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }
 
   rotate(rotate) {
-    const currentPage = this.viewer._currentPageNumber;
-    const canvas = this.viewer.getPageView(currentPage - 1).canvas
-    canvas.style.transform = rotate?"rotate(90deg)":"rotate(0deg)";
+    const currentPageNumber = this.viewer._currentPageNumber;
+    const currentPage = this.viewer.getPageView(currentPageNumber - 1).div;
+
+    if (rotate) {
+      currentPage.classList.add('PdfHighlighter__rotated');
+    } else {
+      currentPage.classList.remove('PdfHighlighter__rotated')
+    }
   }
 
   screenshot(position: T_LTWH, pageNumber: number) {
