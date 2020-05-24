@@ -29,3 +29,10 @@
   transform : rotate(90deg) scale(0.7);
 }
 
+.PdfHighlighter__scaled {
+  -webkit-transform : scale(2.0);
+  -moz-transform : scale(2.0);
+  -ms-transform :  scale(2.0);
+  -o-transform : scale(2.0);
+  transform : scale(2.0);
+}

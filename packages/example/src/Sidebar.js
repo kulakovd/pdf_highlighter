@@ -8,14 +8,16 @@ type T_ManuscriptHighlight = T_Highlight;
 type Props = {
   highlights: Array<T_ManuscriptHighlight>,
   resetHighlights: () => void,
-  rotate: () => void
+  rotate: () => void,
+    scale : () => void
+
 };
 
 const updateHash = highlight => {
   document.location.hash = `highlight-${highlight.id}`;
 };
 
-function Sidebar({ highlights, resetHighlights, rotate }: Props) {
+function Sidebar({ highlights, resetHighlights, rotate, scale }: Props) {
   return (
     <div className="sidebar" style={{ width: "25vw" }}>
       <div className="description" style={{ padding: "1rem" }}>
@@ -63,6 +65,10 @@ function Sidebar({ highlights, resetHighlights, rotate }: Props) {
         Повернуть
         <input type="checkbox" id="rotate" name="rotate" onChange={rotate}/>
       </label>
+        <label>
+            Масштаб 2х
+            <input type="checkbox" id="scale" name="scale" onChange={scale}/>
+        </label>
       {highlights.length > 0 ? (
         <div style={{ padding: "1rem" }}>
           <button onClick={resetHighlights}>Сбросить</button>

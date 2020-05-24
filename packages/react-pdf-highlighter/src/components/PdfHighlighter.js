@@ -97,7 +97,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     scrolledToHighlightId: EMPTY_ID,
     isAreaSelectionInProgress: false,
     tip: null,
-    rotate: false
+    rotate: false,
+    scale: false
   };
 
   viewer: T_PDFJS_Viewer;
@@ -227,6 +228,17 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     };
   }
 
+  scale(scale) {
+    const currentPageNumber = this.viewer._currentPageNumber;
+    const currentPage = this.viewer.getPageView(currentPageNumber - 1).div;
+
+    if (scale){
+      currentPage.classList.add('PdfHighlighter__scaled');
+    } else {
+      currentPage.classList.remove('PdfHighlighter__scaled')
+    }
+  }
+
   rotate(rotate) {
     const currentPageNumber = this.viewer._currentPageNumber;
     const currentPage = this.viewer.getPageView(currentPageNumber - 1).div;
@@ -244,9 +256,10 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }
 
   renderHighlights(nextProps?: Props<T_HT>) {
-    const { highlightTransform, highlights, rotate } = nextProps || this.props;
+    const { highlightTransform, highlights, rotate, scale } = nextProps || this.props;
 
     this.rotate(rotate);
+    this.scale(scale);
 
     const { pdfDocument } = this.props;
 

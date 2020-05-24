@@ -62,7 +62,8 @@ class App extends Component<Props, State> {
 
     state = {
         highlights: item ? JSON.parse(item) ? [...JSON.parse(item)] : [] : [],
-        rotate: false
+        rotate: false,
+        scale: false
     };
 
     state: State;
@@ -79,6 +80,11 @@ class App extends Component<Props, State> {
             ...this.state, rotate: !this.state.rotate
         });
         console.log(this.state)
+    };
+    scale = () => {
+        this.setState({
+            ...this.state, scale: !this.state.scale
+        });
     };
 
     scrollViewerTo = (highlight: any) => {
@@ -134,7 +140,7 @@ class App extends Component<Props, State> {
     }
 
     render() {
-        const {highlights, rotate} = this.state;
+        const {highlights, rotate, scale} = this.state;
         localStorage.setItem(url, highlights);
         return (
             <div className="App" style={{display: "flex", height: "100vh"}}>
@@ -152,6 +158,7 @@ class App extends Component<Props, State> {
                                 <PdfHighlighter
                                     pdfDocument={pdfDocument}
                                     rotate={rotate}
+                                    scale={scale}
                                     enableAreaSelection={event => event.altKey}
                                     onScrollChange={resetHash}
                                     scrollRef={scrollTo => {
@@ -228,6 +235,7 @@ class App extends Component<Props, State> {
                         highlights={highlights}
                         resetHighlights={this.resetHighlights}
                         rotate={this.rotate}
+                        scale={this.scale}
                     />
                 </SplitterLayout>
             </div>
