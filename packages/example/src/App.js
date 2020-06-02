@@ -12,7 +12,9 @@ import {
     Tip,
     Highlight,
     Popup,
-    AreaHighlight
+    AreaHighlight,
+    PdfViewer
+
 } from "react-pdf-highlighter";
 
 import testHighlights from "./test-highlights";
@@ -153,6 +155,16 @@ class App extends Component<Props, State> {
                             position: "relative"
                         }}
                     >
+                        <div className='col-sm-12 text-center'>
+                            <h1 className='text-white bg-info rounded'>Fetch PDF by URL</h1>
+                            <div className='border rounded'>
+                                <PdfViewer
+                                    document={{
+                                        url: 'https://arxiv.org/pdf/quant-ph/0410100.pdf',
+                                    }}
+                                />
+                            </div>
+                        </div>
                         <PdfLoader url={url} beforeLoad={<Spinner/>}>
                             {pdfDocument => (
                                 <PdfHighlighter

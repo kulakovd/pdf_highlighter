@@ -14,8 +14,13 @@
   "dependencies": {
     "lodash": "^4.17.10",
     "pdfjs-dist": "2.2.228",
+    "prop-types": "^15.7.2",
     "react-pointable": "^1.1.1",
-    "react-rnd": "^7.1.5"
+    "react-rnd": "^7.1.5",
+    "bootstrap": "^4.4.1",
+    "bulma": "^0.8.1",
+    "bulma-helpers": "^0.3.10",
+    "material-design-icons": "^3.0.1"
   },
   "peerDependencies": {
     "react": ">=0.14",
@@ -27,6 +32,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-flow": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
     "flow-copy-source": "^2.0.9"
   },
   "author": "Artem Tyurin <artem.tyurin@gmail.com>",
