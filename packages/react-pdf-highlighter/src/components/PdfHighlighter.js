@@ -54,7 +54,8 @@ type State<T_HT> = {
   },
   isAreaSelectionInProgress: boolean,
   scrolledToHighlightId: string,
-  rotate: boolean
+  rotate: number,
+  scale: number
 };
 
 type Props<T_HT> = {
@@ -81,7 +82,8 @@ type Props<T_HT> = {
     transformSelection: () => void
   ) => ?React$Element<*>,
   enableAreaSelection: (event: MouseEvent) => boolean,
-  rotate: boolean
+  rotate: number,
+  scale: number
 };
 
 const EMPTY_ID = "empty-id";
@@ -97,8 +99,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     scrolledToHighlightId: EMPTY_ID,
     isAreaSelectionInProgress: false,
     tip: null,
-    rotate: false,
-    scale: false
+    rotate: 0,
+    scale: 1
   };
 
   viewer: T_PDFJS_Viewer;
@@ -109,7 +111,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   debouncedAfterSelection: () => void;
 
   componentDidUpdate(prevProps: Props<T_HT>) {
-    if (prevProps.highlights !== this.props.highlights) {
+    if (prevProps !== this.props) {
       this.renderHighlights(this.props);
     }
   }
@@ -230,23 +232,20 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
   scale(scale) {
     const currentPageNumber = this.viewer._currentPageNumber;
-    const currentPage = this.viewer.getPageView(currentPageNumber - 1).div;
-
-    if (scale){
-      currentPage.classList.add('PdfHighlighter__scaled');
-    } else {
-      currentPage.classList.remove('PdfHighlighter__scaled')
-    }
+    const currentPage = this.viewer.getPageView(currentPageNumber - 1)
+    currentPage.update(scale,0)
   }
 
-  rotate(rotate) {
+  rotate(angle) {
     const currentPageNumber = this.viewer._currentPageNumber;
     const currentPage = this.viewer.getPageView(currentPageNumber - 1).div;
 
-    if (rotate) {
-      currentPage.classList.add('PdfHighlighter__rotated');
-    } else {
-      currentPage.classList.remove('PdfHighlighter__rotated')
+    currentPage.classList.remove('PdfHighlighter__rotated_right')
+    currentPage.classList.remove('PdfHighlighter__rotated_left')
+    if (angle === 90) {
+      currentPage.classList.add('PdfHighlighter__rotated_right');
+    } else if (angle === -90) {
+      currentPage.classList.add('PdfHighlighter__rotated_left')
     }
   }
 

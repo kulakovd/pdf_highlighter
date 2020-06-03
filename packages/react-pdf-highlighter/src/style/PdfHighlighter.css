@@ -21,18 +21,18 @@
   pointer-events: none;
 }
 
-.PdfHighlighter__rotated {
-  -webkit-transform : rotate(90deg) scale(0.7);
-  -moz-transform : rotate(90deg) scale(0.7);
-  -ms-transform : rotate(90deg) scale(0.7);
-  -o-transform : rotate(90deg) scale(0.7);
-  transform : rotate(90deg) scale(0.7);
+.PdfHighlighter__rotated_right {
+  -webkit-transform : rotate(90deg);
+  -moz-transform : rotate(90deg);
+  -ms-transform : rotate(90deg);
+  -o-transform : rotate(90deg);
+  transform : rotate(90deg);
 }
 
-.PdfHighlighter__scaled {
-  -webkit-transform : scale(2.0);
-  -moz-transform : scale(2.0);
-  -ms-transform :  scale(2.0);
-  -o-transform : scale(2.0);
-  transform : scale(2.0);
+.PdfHighlighter__rotated_left {
+  -webkit-transform : rotate(-90deg);
+  -moz-transform : rotate(-90deg);
+  -ms-transform : rotate(-90deg);
+  -o-transform : rotate(-90deg);
+  transform : rotate(-90deg);
 }

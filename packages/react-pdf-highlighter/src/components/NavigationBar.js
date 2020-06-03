@@ -61,26 +61,6 @@ const Navigation = ({
                 </div>
             )}
             <div className='column'></div>
-            <div className='column is-3 buttons are-small has-addons is-centered'>
-                <PreviousPageButton
-                    css={css.previousPageBtn}
-                    page={page}
-                    pages={pages}
-                    handlePrevClick={handlePrevClick}
-                />
-                <PagesIndicator
-                    css={css.pageIndicator}
-                    page={page}
-                    pages={pages}
-                />
-                <NextPageButton
-                    css={css.nextPageBtn}
-                    page={page}
-                    pages={pages}
-                    handleNextClick={handleNextClick}
-                />
-            </div>
-            <div className='column'></div>
             {hideRotation ? (
                 <div className='column is-2'></div>
             ) : (

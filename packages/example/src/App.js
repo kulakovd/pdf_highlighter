@@ -64,8 +64,8 @@ class App extends Component<Props, State> {
 
     state = {
         highlights: item ? JSON.parse(item) ? [...JSON.parse(item)] : [] : [],
-        rotate: false,
-        scale: false
+        rotate: 0,
+        scale: 1
     };
 
     state: State;
@@ -74,20 +74,20 @@ class App extends Component<Props, State> {
         this.setState({
             ...this.state, highlights: []
         });
-        console.log(this.state)
     };
 
-    rotate = () => {
+
+    setRotation = (angle) =>{
         this.setState({
-            ...this.state, rotate: !this.state.rotate
+            ...this.state, rotate: angle
         });
-        console.log(this.state)
-    };
-    scale = () => {
+    }
+
+    setZoom = (scale) =>{
         this.setState({
-            ...this.state, scale: !this.state.scale
+            ...this.state, scale: scale
         });
-    };
+    }
 
     scrollViewerTo = (highlight: any) => {
     };
@@ -143,6 +143,8 @@ class App extends Component<Props, State> {
 
     render() {
         const {highlights, rotate, scale} = this.state;
+        console.log(rotate)
+        console.log(scale)
         localStorage.setItem(url, highlights);
         return (
             <div className="App" style={{display: "flex", height: "100vh"}}>
@@ -162,6 +164,8 @@ class App extends Component<Props, State> {
                                     document={{
                                         url: 'https://arxiv.org/pdf/quant-ph/0410100.pdf',
                                     }}
+                                    onZoom={scale =>this.setZoom(scale)}
+                                    onRotation={angle => this.setRotation(angle)}
                                 />
                             </div>
                         </div>
