@@ -170,21 +170,8 @@ class PDFViewer extends React.Component {
 
         const NavigationElement = navigation
 
-        const pdf = (
-            <PDF
-                src={source}
-                pageNum={page}
-                scale={scale}
-                rotation={rotationAngle}
-                pageCount={num => this.getPageCount(num)}
-                protectContent={protectContent}
-                watermark={watermark}
-                alert={alert}
-            />
-        )
-
         let nav = null
-        if (!hideNavbar && pages > 0) {
+        if (!hideNavbar) {
             nav =
                 !navigation ||
                 (navigation && typeof navigation === 'object') ? (
@@ -233,56 +220,8 @@ class PDFViewer extends React.Component {
 
         return (
             <div className={css ? css : 'container text-center'}>
-                <div style={{ display: this.state.isReady ? 'none' : 'block' }}>
-                    <div
-                        className={canvasCss ? canvasCss : ''}
-                        style={
-                            canvasCss
-                                ? {}
-                                : {
-                                      height: '1000px',
-                                      overflow: 'auto',
-                                  }
-                        }>
-                        {loader ? loader : <Loader />}
-                    </div>
-                </div>
-                <div style={{ display: this.state.isReady ? 'block' : 'none' }}>
-                    {navbarOnTop ? (
-                        <div>
-                            <div>{nav}</div>
-                            <div
-                                className={canvasCss ? canvasCss : ''}
-                                style={
-                                    canvasCss
-                                        ? {}
-                                        : {
-                                              height: '1000px',
-                                              overflow: 'auto',
-                                          }
-                                }
-                                onClick={onDocumentClick}>
-                                {pdf}
-                            </div>
-                        </div>
-                    ) : (
-                        <div>
-                            <div
-                                className={canvasCss ? canvasCss : ''}
-                                style={
-                                    canvasCss
-                                        ? {}
-                                        : {
-                                              height: '1000px',
-                                              overflow: 'auto',
-                                          }
-                                }
-                                onClick={onDocumentClick}>
-                                {pdf}
-                            </div>
-                            <div>{nav}</div>
-                        </div>
-                    )}
+                <div>
+                    <div>{nav}</div>
                 </div>
             </div>
         )
