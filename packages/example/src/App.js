@@ -159,6 +159,9 @@ class App extends Component<Props, State> {
                                 <PdfViewer
                                     onZoom={scale =>this.setZoom(scale)}
                                     onRotation={angle => this.setRotation(angle)}
+                                    scaleStep={0.1}
+                                    maxScale={5}
+                                    minScale={0.5}
                                 />
                             </div>
                         <PdfLoader url={url} beforeLoad={<Spinner/>}>
