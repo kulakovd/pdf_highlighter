@@ -235,23 +235,12 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     };
   }
 
-  scale(scale) {
+  scale(scale,relativeRotation) {
     const currentPageNumber = this.viewer._currentPageNumber;
-    const currentPage = this.viewer.getPageView(currentPageNumber - 1)
-    currentPage.update(scale,0)
-  }
+    const currentPage = this.viewer.getPageView(currentPageNumber - 1).div
 
-  rotate(angloe) {
-    const currentPageNumber = this.viewer._currentPageNumber;
-    const currentPage = this.viewer.getPageView(currentPageNumber - 1).div;
-
-    currentPage.classList.remove('PdfHighlighter__rotated_right')
-    currentPage.classList.remove('PdfHighlighter__rotated_left')
-    if (angloe === 90) {
-      currentPage.classList.add('PdfHighlighter__rotated_right');
-    } else if (angloe === -90) {
-      currentPage.classList.add('PdfHighlighter__rotated_left')
-    }
+    var cssTransform = 'rotate(' + relativeRotation + 'deg) ' + 'scale(' + scale + ',' + scale + ')';
+    currentPage.style.transform = cssTransform;
   }
 
   screenshot(position: T_LTWH, pageNumber: number) {
@@ -262,8 +251,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   renderHighlights(nextProps?: Props<T_HT>) {
     const { highlightTransform, highlights, rotate, scale } = nextProps || this.props;
 
-    this.rotate(rotate);
-    this.scale(scale);
+    this.scale(scale,rotate);
 
     const { pdfDocument } = this.props;
 

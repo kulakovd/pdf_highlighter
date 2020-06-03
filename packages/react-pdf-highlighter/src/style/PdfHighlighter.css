@@ -20,19 +20,3 @@
   user-select: none;
   pointer-events: none;
 }
-
-.PdfHighlighter__rotated_right {
-  -webkit-transform : rotate(90deg);
-  -moz-transform : rotate(90deg);
-  -ms-transform : rotate(90deg);
-  -o-transform : rotate(90deg);
-  transform : rotate(90deg);
-}
-
-.PdfHighlighter__rotated_left {
-  -webkit-transform : rotate(-90deg);
-  -moz-transform : rotate(-90deg);
-  -ms-transform : rotate(-90deg);
-  -o-transform : rotate(-90deg);
-  transform : rotate(-90deg);
-}
