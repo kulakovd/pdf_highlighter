@@ -143,8 +143,6 @@ class App extends Component<Props, State> {
 
     render() {
         const {highlights, rotate, scale} = this.state;
-        console.log(rotate)
-        console.log(scale)
         localStorage.setItem(url, highlights);
         return (
             <div className="App" style={{display: "flex", height: "100vh"}}>

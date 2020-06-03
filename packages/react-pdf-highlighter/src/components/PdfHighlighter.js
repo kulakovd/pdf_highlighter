@@ -129,7 +129,9 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       enhanceTextSelection: true,
       removePageBorders: true,
       useOnlyCssZoom : true,
-      linkService: this.linkService
+      linkService: this.linkService,
+      scale:1
+
     });
 
     this.viewer.setDocument(pdfDocument);
@@ -406,7 +408,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   onDocumentReady = () => {
     const { scrollRef } = this.props;
 
-    this.viewer.currentScaleValue = "auto";
+    // this.viewer.currentScaleValue = "auto";
 
     scrollRef(this.scrollTo);
   };
