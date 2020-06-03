@@ -157,18 +157,12 @@ class App extends Component<Props, State> {
                             position: "relative"
                         }}
                     >
-                        <div className='col-sm-12 text-center'>
-                            <h1 className='text-white bg-info rounded'>Fetch PDF by URL</h1>
                             <div className='border rounded'>
                                 <PdfViewer
-                                    document={{
-                                        url: 'https://arxiv.org/pdf/quant-ph/0410100.pdf',
-                                    }}
                                     onZoom={scale =>this.setZoom(scale)}
                                     onRotation={angle => this.setRotation(angle)}
                                 />
                             </div>
-                        </div>
                         <PdfLoader url={url} beforeLoad={<Spinner/>}>
                             {pdfDocument => (
                                 <PdfHighlighter

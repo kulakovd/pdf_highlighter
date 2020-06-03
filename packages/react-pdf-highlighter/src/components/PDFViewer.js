@@ -142,13 +142,6 @@ class PDFViewer extends React.Component {
 
     render() {
         let source
-        for (let [type, src] of Object.entries(this.props.document)) {
-            if (type === 'base64') {
-                source = { data: atob(src) }
-            } else {
-                source = src
-            }
-        }
         const {
             loader,
             maxScale,
@@ -229,11 +222,6 @@ class PDFViewer extends React.Component {
 }
 
 PDFViewer.propTypes = {
-    document: PropTypes.shape({
-        url: PropTypes.string, // File path
-        base64: PropTypes.string, // PDF file encoded in base64
-    }).isRequired,
-
     loader: PropTypes.node,
     page: PropTypes.number,
     scale: PropTypes.number,
