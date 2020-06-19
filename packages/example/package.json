@@ -27,7 +27,7 @@
     "extends": "react-app"
   },
   "proxy": "https://localhost:3000",
-  "homepage": "https://agentcooper.github.io/react-pdf-highlighter",
+  "homepage": "https://mikhailzisman.github.io/pdf_highlighter",
   "browserslist": {
     "production": [
       ">0.2%",
