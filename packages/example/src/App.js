@@ -60,10 +60,18 @@ const url = searchParams.get("url") || DEFAULT_URL;
 
 let item = localStorage.getItem(url);
 
-class App extends Component<Props, State> {
+function isJson(item) {
+    try {
+        JSON.parse(item);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 
+class App extends Component<Props, State> {
     state = {
-        highlights: item ? JSON.parse(item) ? [...JSON.parse(item)] : [] : [],
+        highlights: isJson(item) ? JSON.parse(item) ? [...JSON.parse(item)] : [] : [],
         rotate: 0,
         scale: 1
     };
@@ -116,10 +124,6 @@ class App extends Component<Props, State> {
 
     addHighlight(highlight: T_NewHighlight) {
         const {highlights} = this.state;
-
-        console.log("Saving highlight", highlight);
-
-        localStorage.setItem(url, JSON.stringify(highlights));
         this.setState({
             highlights: [{...highlight, id: getNextId()}, ...highlights]
         });
@@ -143,7 +147,7 @@ class App extends Component<Props, State> {
 
     render() {
         const {highlights, rotate, scale} = this.state;
-        localStorage.setItem(url, highlights);
+        localStorage.setItem(url, JSON.stringify(highlights));
         return (
             <div className="App" style={{display: "flex", height: "100vh"}}>
                 <SplitterLayout>
