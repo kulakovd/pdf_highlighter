@@ -119,7 +119,7 @@ class App extends Component<Props, State> {
 
         console.log("Saving highlight", highlight);
 
-        localStorage.setItem(url, JSON.stringify(highlight));
+        localStorage.setItem(url, JSON.stringify(highlights));
         this.setState({
             highlights: [{...highlight, id: getNextId()}, ...highlights]
         });
