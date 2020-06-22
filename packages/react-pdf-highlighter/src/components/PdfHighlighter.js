@@ -237,10 +237,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
   scale(scale,relativeRotation) {
     const currentPageNumber = this.viewer._currentPageNumber;
-    const currentPage = this.viewer.getPageView(currentPageNumber - 1).div
-
-    var cssTransform = 'rotate(' + relativeRotation + 'deg) ' + 'scale(' + scale + ',' + scale + ')';
-    currentPage.style.transform = cssTransform;
+    this.viewer.currentScaleValue = scale
+    this.viewer.pagesRotation = relativeRotation
   }
 
   screenshot(position: T_LTWH, pageNumber: number) {
