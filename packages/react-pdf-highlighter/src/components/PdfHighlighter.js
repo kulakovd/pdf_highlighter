@@ -212,10 +212,12 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }: T_ScaledPosition): T_Position {
     const viewport = this.viewer.getPageView(pageNumber - 1).viewport;
     let currentScale = this.viewer.currentScaleValue;
+    let pagesRotation = this.viewer.pagesRotation;
+
     return {
-      boundingRect: scaledToViewport(boundingRect, viewport, usePdfCoordinates, currentScale),
+      boundingRect: scaledToViewport(boundingRect, viewport, usePdfCoordinates, currentScale,pagesRotation),
       rects: (rects || []).map(rect =>
-        scaledToViewport(rect, viewport, usePdfCoordinates, currentScale)
+        scaledToViewport(rect, viewport, usePdfCoordinates, currentScale,pagesRotation)
       ),
       pageNumber
     };
@@ -365,6 +367,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     const scrollMargin = 10;
 
     let currentScaleValue = this.viewer.currentScaleValue;
+    let pagesRotation = this.viewer.pagesRotation;
     this.viewer.scrollPageIntoView({
       pageNumber,
       destArray: [
@@ -372,7 +375,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
         { name: "XYZ" },
         ...pageViewport.convertToPdfPoint(
           0,
-          scaledToViewport(boundingRect, pageViewport, usePdfCoordinates, currentScaleValue).top -
+          scaledToViewport(boundingRect, pageViewport, usePdfCoordinates, currentScaleValue, pagesRotation).top -
             scrollMargin
         ),
         0
