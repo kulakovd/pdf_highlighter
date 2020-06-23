@@ -217,6 +217,8 @@ class App extends Component<Props, State> {
                                             />
                                         ) : (
                                             <AreaHighlight
+                                                rotate={rotate}
+                                                scale={scale}
                                                 highlight={highlight}
                                                 onChange={boundingRect => {
                                                     this.updateHighlight(
@@ -230,6 +232,8 @@ class App extends Component<Props, State> {
 
                                         return (
                                             <Popup
+                                                rotate={rotate}
+                                                scale={scale}
                                                 popupContent={<HighlightPopup {...highlight} />}
                                                 onMouseOver={popupContent =>
                                                     setTip(highlight, highlight => popupContent)

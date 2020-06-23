@@ -11,7 +11,9 @@ import type { T_ViewportHighlight, T_LTWH } from "../types";
 
 type Props = {
   highlight: T_ViewportHighlight,
-  onChange: (rect: T_LTWH) => void
+  onChange: (rect: T_LTWH) => void,
+    rotate: number,
+    scale:number
 };
 
 class AreaHighlight extends Component<Props> {
