@@ -229,16 +229,16 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     rects
   }: T_Position): T_ScaledPosition {
     const viewport = this.viewer.getPageView(pageNumber - 1).viewport;
-
+    let currentScaleValue = this.viewer.currentScaleValue;
+    let pagesRotation = this.viewer.pagesRotation;
     return {
-      boundingRect: viewportToScaled(boundingRect, viewport),
-      rects: (rects || []).map(rect => viewportToScaled(rect, viewport)),
+      boundingRect: viewportToScaled(boundingRect, viewport, currentScaleValue, pagesRotation),
+      rects: (rects || []).map(rect => viewportToScaled(rect, viewport, currentScaleValue, pagesRotation)),
       pageNumber
     };
   }
 
   scale(scale,relativeRotation) {
-    const currentPageNumber = this.viewer._currentPageNumber;
     this.viewer.currentScaleValue = scale
     this.viewer.pagesRotation = relativeRotation
   }
@@ -296,7 +296,9 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                   rect => {
                     const viewport = this.viewer.getPageView(pageNumber - 1)
                       .viewport;
-                    return viewportToScaled(rect, viewport);
+                    let currentScaleValue = this.viewer.currentScaleValue;
+                    let pagesRotation = this.viewer.pagesRotation;
+                    return viewportToScaled(rect, viewport, currentScaleValue, pagesRotation);
                   },
                   boundingRect => this.screenshot(boundingRect, pageNumber),
                   isScrolledTo

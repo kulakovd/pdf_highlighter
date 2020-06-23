@@ -12,7 +12,9 @@ type WIDTH_HEIGHT = { width: number, height: number };
 
 export const viewportToScaled = (
     rect: T_LTWH,
-    {width, height}: WIDTH_HEIGHT
+    {width, height}: WIDTH_HEIGHT,
+    scale: string,
+    rotation: string
 ): T_Scaled => {
     return {
         x1: rect.left,
@@ -26,7 +28,8 @@ export const viewportToScaled = (
     };
 };
 
-const pdfToViewport = (pdf, viewport): T_LTWH => {
+const pdfToViewport = (pdf, viewport, currentScaleValue: string,
+                       rotation: string): T_LTWH => {
     const [x1, y1, x2, y2] = viewport.convertToViewportRectangle([
         pdf.x1,
         pdf.y1,
@@ -53,7 +56,7 @@ export const scaledToViewport = (
     const {width, height} = viewport;
 
     if (usePdfCoordinates) {
-        return pdfToViewport(scaled, viewport);
+        return pdfToViewport(scaled, viewport, currentScaleValue,rotation);
     }
 
     if (scaled.x1 === undefined) {
