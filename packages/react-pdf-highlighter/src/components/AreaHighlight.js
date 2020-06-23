@@ -18,7 +18,7 @@ type Props = {
 
 class AreaHighlight extends Component<Props> {
   render() {
-    const { highlight, onChange, ...otherProps } = this.props;
+    const { highlight, onChange, rotate, scale, ...otherProps } = this.props;
 
     return (
       <Rnd
