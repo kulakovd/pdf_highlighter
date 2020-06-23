@@ -82,10 +82,10 @@ export const scaledToViewport = (
     }
     if (rotation === -90) {
         console.log("-90")
-        const x1 = (width * (scaled.x1)) / scaled.height / currentScaleValue;
+        const x1 = (width * scaled.x1) / scaled.height / currentScaleValue;
         const y1 = (height * (scaled.height-scaled.y1)) / scaled.width / currentScaleValue;
 
-        const x2 = (width * (scaled.x2)) / scaled.height / currentScaleValue;
+        const x2 = (width * scaled.x2) / scaled.height / currentScaleValue;
         const y2 = (height * (scaled.height-scaled.y2)) / scaled.width / currentScaleValue;
         return {
             left: x1,
