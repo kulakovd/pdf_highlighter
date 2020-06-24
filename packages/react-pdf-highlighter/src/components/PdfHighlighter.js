@@ -243,6 +243,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     currentPage.style.transform = cssTransform;
   }
 
+
   screenshot(position: T_LTWH, pageNumber: number) {
     const canvas = this.viewer.getPageView(pageNumber - 1).canvas;
     return getAreaAsPng(canvas, position);
