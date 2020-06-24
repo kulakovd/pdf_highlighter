@@ -26,7 +26,9 @@ type Props = {
   onDragStart: () => void,
   onDragEnd: () => void,
   shouldStart: (event: MouseEvent) => boolean,
-  onChange: (isVisible: boolean) => void
+  onChange: (isVisible: boolean) => void,
+  rotate: number,
+  scale: number
 };
 
 class MouseSelection extends Component<Props, State> {
@@ -71,7 +73,7 @@ class MouseSelection extends Component<Props, State> {
 
     const that = this;
 
-    const { onSelection, onDragStart, onDragEnd, shouldStart } = this.props;
+    const { onSelection, onDragStart, onDragEnd, shouldStart, scale, rotate } = this.props;
 
     const container = this.root.parentElement;
 

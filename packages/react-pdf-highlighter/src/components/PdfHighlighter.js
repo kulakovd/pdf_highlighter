@@ -515,7 +515,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }
 
   render() {
-    const { onSelectionFinished, enableAreaSelection } = this.props;
+    const { onSelectionFinished, enableAreaSelection, scale, rotate } = this.props;
 
     return (
       <Pointable onPointerDown={this.onMouseDown}>
@@ -527,6 +527,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
           <div className="pdfViewer" />
           {typeof enableAreaSelection === "function" ? (
             <MouseSelection
+                scale={this.props.scale}
+                rotate={this.props.rotate}
               onDragStart={() => this.toggleTextSelection(true)}
               onDragEnd={() => this.toggleTextSelection(false)}
               onChange={isVisible =>
