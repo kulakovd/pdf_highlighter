@@ -26,3 +26,6 @@ https://localhost:3000/?url=https://192.168.0.103:8080/example/file.pdf
 Для тестирования можно установить и запустить локальный сервер:
 1) npm install http-server
 2) http-server --ssl -C cert.pem -o --cors -a localhost
+или  http-server -S -C cert.pem --cors
+
+
