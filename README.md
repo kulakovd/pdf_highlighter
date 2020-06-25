@@ -29,3 +29,4 @@ https://localhost:3000/?url=https://192.168.0.103:8080/example/file.pdf
 или  http-server -S -C cert.pem --cors
 
 
+https://localhost:3000/?url=http://192.168.1.129/packages/example/vectorpdf.pdf
