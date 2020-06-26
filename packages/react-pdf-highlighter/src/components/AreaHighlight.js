@@ -21,6 +21,17 @@ class AreaHighlight extends Component<Props> {
     return (
       <Rnd
         className="AreaHighlight"
+        disableDragging={true}
+        enableResizing={{
+            top: false,
+            right: false,
+            bottom: false,
+            left: false,
+            topRight: false,
+            bottomRight: false,
+            bottomLeft: false,
+            topLeft: false,
+        }}
         onDragStop={(_, data) => {
           const boundingRect = {
             ...highlight.position.boundingRect,
