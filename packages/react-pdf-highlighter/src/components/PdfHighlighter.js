@@ -128,7 +128,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       container: this.containerNode,
       enhanceTextSelection: true,
       removePageBorders: true,
-      useOnlyCssZoom : true,
+      useOnlyCssZoom : false,
       linkService: this.linkService,
       scale:1
 
