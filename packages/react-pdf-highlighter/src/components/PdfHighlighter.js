@@ -546,10 +546,26 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                   return;
                 }
 
+                let left = 0;
+                let top = 0;
+                if (this.props.rotate === 0){
+                   left = boundingRect.left - page.node.offsetLeft
+                   top = boundingRect.top - page.node.offsetTop
+                }
+                if (this.props.rotate === 90){
+                  left = boundingRect.left - page.node.offsetLeft
+                  top = boundingRect.top - page.node.offsetTop
+                }
+                if (this.props.rotate === -90){
+                  left = boundingRect.left - page.node.offsetLeft
+                  top = boundingRect.top - page.node.offsetTop
+                }
+
+                console.log("Pdfhighliter Rotate:" + this.props.rotate)
                 const pageBoundingRect = {
                   ...boundingRect,
-                  top: boundingRect.top - page.node.offsetTop,
-                  left: boundingRect.left - page.node.offsetLeft
+                  top: top,
+                  left: left
                 };
 
                 const viewportPosition = {
