@@ -618,31 +618,28 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       let height = boundingRect.height;
 
       boundingRect.x1 = y1;
-      boundingRect.y1 = Math.abs(x2 - width) //+ Math.abs(width-height);
+      boundingRect.y1 = Math.abs(x2 - width)
       boundingRect.x2 = y2;
-      boundingRect.y2 =  Math.abs(x1 - width)  //+ Math.abs(width-height);
+      boundingRect.y2 =  Math.abs(x1 - width)
       boundingRect.width = height;
       boundingRect.height = width;
-      console.log("abs:", Math.abs(x2 - x1));
-      console.log("abs1",Math.abs(x2 - width + y1));
-      console.log("abs2",Math.abs(x1 - width + y1));
     }
-    //
-    // if (rotate === -90){
-    //   let x1 = boundingRect.x1;
-    //   let y1 = boundingRect.y1;
-    //   let x2 = boundingRect.x2;
-    //   let y2 = boundingRect.y2;
-    //   let width = boundingRect.width;
-    //   let height = boundingRect.height;
-    //
-    //   boundingRect.x1 = height- y1
-    //   boundingRect.y1 = width - x1
-    //   boundingRect.x2 = height - y2
-    //   boundingRect.y2 = width - x2
-    //   boundingRect.width = height
-    //   boundingRect.height = width
-    // }
+
+    if (rotate === -90){
+      let x1 = boundingRect.x1;
+      let y1 = boundingRect.y1;
+      let x2 = boundingRect.x2;
+      let y2 = boundingRect.y2;
+      let width = boundingRect.width;
+      let height = boundingRect.height;
+
+      boundingRect.x1 = y1;
+      boundingRect.y1 = width -  Math.abs(x2 - width)
+      boundingRect.x2 = y2;
+      boundingRect.y2 = width - Math.abs(x1 - width)
+      boundingRect.width = height;
+      boundingRect.height = width;
+    }
 
     console.log("result boundingRect: "+JSON.stringify(boundingRect))
     scaledPosition.boundingRect = boundingRect
