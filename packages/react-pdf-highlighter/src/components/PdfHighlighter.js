@@ -641,6 +641,21 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       boundingRect.height = width;
     }
 
+    if (rotate === -180 || rotate === 180){
+      let x1 = boundingRect.x1;
+      let y1 = boundingRect.y1;
+      let x2 = boundingRect.x2;
+      let y2 = boundingRect.y2;
+      let width = boundingRect.width;
+      let height = boundingRect.height;
+
+      boundingRect.x1 = Math.abs(x2-width);
+      boundingRect.y1 = Math.abs(y2-height);
+      boundingRect.x2 = Math.abs(x1-width);
+      boundingRect.y2 = Math.abs(y1-height);
+      boundingRect.width = width;
+      boundingRect.height = height;
+    }
     console.log("result boundingRect: "+JSON.stringify(boundingRect))
     scaledPosition.boundingRect = boundingRect
 
