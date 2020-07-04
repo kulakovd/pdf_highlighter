@@ -506,7 +506,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
         () =>
           this.setState(
             {
-              ghostHighlight: getGhostHighlight(scale,rotate)
+              ghostHighlight: getGhostHighlight(this.props.scale,this.props.rotate)
             },
             () => this.renderHighlights()
           )
