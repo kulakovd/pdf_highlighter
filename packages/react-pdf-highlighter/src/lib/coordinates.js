@@ -66,7 +66,7 @@ export const scaledToViewport = (
 
     let coords;
 
-    if (rotation === 0) {
+    if (rotation === 0 || rotation ===180 || rotation ===-180) {
         const x1 = (width * scaled.x1) / scaled.width / currentScaleValue;
         const y1 = (height * scaled.y1) / scaled.height / currentScaleValue;
 
