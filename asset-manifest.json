@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/pdf_highlighter/static/css/main.765757f6.chunk.css",
-    "main.js": "/pdf_highlighter/static/js/main.222d9815.chunk.js",
+    "main.js": "/pdf_highlighter/static/js/main.48a71f9d.chunk.js",
     "runtime-main.js": "/pdf_highlighter/static/js/runtime-main.d34b4dd2.js",
     "static/css/2.6f044389.chunk.css": "/pdf_highlighter/static/css/2.6f044389.chunk.css",
     "static/js/2.40456c10.chunk.js": "/pdf_highlighter/static/js/2.40456c10.chunk.js",
     "index.html": "/pdf_highlighter/index.html",
-    "precache-manifest.257d3fe1fe1f8dc5ecb28979be656041.js": "/pdf_highlighter/precache-manifest.257d3fe1fe1f8dc5ecb28979be656041.js",
+    "precache-manifest.0268775b0d4ac85b6c35a76f8b72d431.js": "/pdf_highlighter/precache-manifest.0268775b0d4ac85b6c35a76f8b72d431.js",
     "service-worker.js": "/pdf_highlighter/service-worker.js",
     "static/js/2.40456c10.chunk.js.LICENSE": "/pdf_highlighter/static/js/2.40456c10.chunk.js.LICENSE",
     "static/media/material-icons.css": "/pdf_highlighter/static/media/MaterialIcons-Regular.e79bfd88.eot"
@@ -16,6 +16,6 @@
     "static/css/2.6f044389.chunk.css",
     "static/js/2.40456c10.chunk.js",
     "static/css/main.765757f6.chunk.css",
-    "static/js/main.222d9815.chunk.js"
+    "static/js/main.48a71f9d.chunk.js"
   ]
 }
