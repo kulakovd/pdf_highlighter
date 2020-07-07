@@ -610,6 +610,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
   getGhostHighlight(scaledPosition, image, scale, rotate) {
     let boundingRect = scaledPosition.boundingRect;
+
+    console.log("bound init" + JSON.stringify(boundingRect));
     if (rotate === 0){
       //
     }
@@ -638,10 +640,11 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       let width = boundingRect.width;
       let height = boundingRect.height;
 
-      boundingRect.x1 = y1;
-      boundingRect.y1 = width -  Math.abs(x2 - width)
-      boundingRect.x2 = y2;
-      boundingRect.y2 = width - Math.abs(x1 - width)
+      // debugger;
+      boundingRect.x1 = Math.abs(y2 - height);
+      boundingRect.y2 = width -  Math.abs(x2 - width)
+      boundingRect.x2 =  Math.abs(y1 - height);
+      boundingRect.y1 = width - Math.abs(x1 - width)
       boundingRect.width = height;
       boundingRect.height = width;
     }
@@ -663,6 +666,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     }
     scaledPosition.boundingRect = boundingRect
 
+    console.log("bound result" + JSON.stringify(boundingRect))
     return {
       position: scaledPosition,
       content: {image}
