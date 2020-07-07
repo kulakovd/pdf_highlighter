@@ -492,7 +492,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     const scaledPosition = this.viewportPositionToScaled(viewportPosition);
 
     function getGhostHighlight(scale, rotate) {
-        console.log("scale: "+scale + " rotate: " + rotate)
       return {position: scaledPosition};
     }
 
@@ -563,17 +562,25 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                   pageNumber: page.number
                 };
 
-                console.log("pageBoundingRect "+JSON.stringify(pageBoundingRect))
-                console.log("viewportPosition " + JSON.stringify(viewportPosition))
+
 
                 const scaledPosition = this.viewportPositionToScaled(
                   viewportPosition
                 );
 
-                console.log("scaledPosition " + JSON.stringify(scaledPosition))
+                const copyScaledPosition = JSON.parse(JSON.stringify(scaledPosition)) ;
+                const ghostHighlight = this.getGhostHighlight(copyScaledPosition, "", this.props.scale, this.props.rotate).position;
 
+                console.log("pageBoundingRect "+JSON.stringify(pageBoundingRect))
+                console.log("ghostHighlight "+JSON.stringify(ghostHighlight))
+                let screenShotRect = {
+                  left: ghostHighlight.boundingRect.x1,
+                  top: ghostHighlight.boundingRect.y1,
+                  width: ghostHighlight.boundingRect.x2 - ghostHighlight.boundingRect.x1,
+                  height: ghostHighlight.boundingRect.y2 - ghostHighlight.boundingRect.y1
+                };
 
-                const image = this.screenshot(pageBoundingRect, page.number);
+                const image = this.screenshot(screenShotRect, page.number);
 
                 this.renderTipAtPosition(
                   viewportPosition,
@@ -602,9 +609,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }
 
   getGhostHighlight(scaledPosition, image, scale, rotate) {
-    console.log("scale: "+scale + " rotate: " + rotate)
     let boundingRect = scaledPosition.boundingRect;
-    console.log("init boundingRect: "+JSON.stringify(boundingRect))
     if (rotate === 0){
       //
     }
@@ -656,7 +661,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       boundingRect.width = width;
       boundingRect.height = height;
     }
-    console.log("result boundingRect: "+JSON.stringify(boundingRect))
     scaledPosition.boundingRect = boundingRect
 
     return {

@@ -137,15 +137,8 @@ class MouseSelection extends Component<Props, State> {
           return;
         }
 
-        console.log("X: "+event.pageX,"Y: "+event.pageY)
         const end = containerCoords(event.pageX, event.pageY);
-        console.log("container x: "+ end.x)
-        console.log("container y: "+ end.y)
         const boundingRect = that.getBoundingRect(start, end);
-        console.log("left: "+ boundingRect.left)
-        console.log("top: "+ boundingRect.top)
-        console.log("width: "+ boundingRect.width)
-        console.log("height: "+ boundingRect.height)
         if (
           !(event.target instanceof HTMLElement) ||
           !container.contains(event.target) ||
