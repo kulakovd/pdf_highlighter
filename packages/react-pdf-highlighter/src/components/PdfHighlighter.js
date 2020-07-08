@@ -175,7 +175,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     highlights: Array<T_HT>
   ): { [pageNumber: string]: Array<T_HT> } {
     const { ghostHighlight } = this.state;
-
+    console.log("ghostHighlight:" + JSON.stringify(ghostHighlight) )
     return [...highlights, ghostHighlight]
       .filter(Boolean)
       .reduce((res, highlight) => {
@@ -259,6 +259,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
     const highlightsByPage = this.groupHighlightsByPage(highlights);
 
+    console.log("highlightsByPage: " + JSON.stringify(highlightsByPage))
     for (let pageNumber = 1; pageNumber <= pdfDocument.numPages; pageNumber++) {
       const highlightLayer = this.findOrCreateHighlightLayer(pageNumber);
 
@@ -490,6 +491,11 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     };
     const scaledPosition = this.viewportPositionToScaled(viewportPosition);
 
+    function getGhostHighlight(scale, rotate) {
+      return {position: scaledPosition};
+    }
+
+
     this.renderTipAtPosition(
       viewportPosition,
       onSelectionFinished(
@@ -499,7 +505,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
         () =>
           this.setState(
             {
-              ghostHighlight: { position: scaledPosition }
+              ghostHighlight: getGhostHighlight(this.props.scale,this.props.rotate)
             },
             () => this.renderHighlights()
           )
@@ -515,9 +521,9 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }
 
   render() {
-    const { onSelectionFinished, enableAreaSelection, scale, rotate } = this.props;
+    const { onSelectionFinished, enableAreaSelection,scale,rotate } = this.props;
 
-    return (
+      return (
       <Pointable onPointerDown={this.onMouseDown}>
         <div
           ref={node => (this.containerNode = node)}
@@ -527,8 +533,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
           <div className="pdfViewer" />
           {typeof enableAreaSelection === "function" ? (
             <MouseSelection
-                scale={this.props.scale}
-                rotate={this.props.rotate}
               onDragStart={() => this.toggleTextSelection(true)}
               onDragEnd={() => this.toggleTextSelection(false)}
               onChange={isVisible =>
@@ -546,26 +550,10 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                   return;
                 }
 
-                let left = 0;
-                let top = 0;
-                if (this.props.rotate === 0){
-                   left = boundingRect.left - page.node.offsetLeft
-                   top = boundingRect.top - page.node.offsetTop
-                }
-                if (this.props.rotate === 90){
-                  left = boundingRect.left - page.node.offsetLeft
-                  top = boundingRect.top - page.node.offsetTop
-                }
-                if (this.props.rotate === -90){
-                  left = boundingRect.left - page.node.offsetLeft
-                  top = boundingRect.top - page.node.offsetTop
-                }
-
-                console.log("Pdfhighliter Rotate:" + this.props.rotate)
                 const pageBoundingRect = {
                   ...boundingRect,
-                  top: top,
-                  left: left
+                  top: boundingRect.top - page.node.offsetTop,
+                  left: boundingRect.left - page.node.offsetLeft
                 };
 
                 const viewportPosition = {
@@ -574,11 +562,25 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                   pageNumber: page.number
                 };
 
+
+
                 const scaledPosition = this.viewportPositionToScaled(
                   viewportPosition
                 );
 
-                const image = this.screenshot(pageBoundingRect, page.number);
+                const copyScaledPosition = JSON.parse(JSON.stringify(scaledPosition)) ;
+                const ghostHighlight = this.getGhostHighlight(copyScaledPosition, "", this.props.scale, this.props.rotate).position;
+
+                console.log("pageBoundingRect "+JSON.stringify(pageBoundingRect))
+                console.log("ghostHighlight "+JSON.stringify(ghostHighlight))
+                let screenShotRect = {
+                  left: ghostHighlight.boundingRect.x1,
+                  top: ghostHighlight.boundingRect.y1,
+                  width: ghostHighlight.boundingRect.x2 - ghostHighlight.boundingRect.x1,
+                  height: ghostHighlight.boundingRect.y2 - ghostHighlight.boundingRect.y1
+                };
+
+                const image = this.screenshot(screenShotRect, page.number);
 
                 this.renderTipAtPosition(
                   viewportPosition,
@@ -589,10 +591,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                     () =>
                       this.setState(
                         {
-                          ghostHighlight: {
-                            position: scaledPosition,
-                            content: { image }
-                          }
+                          ghostHighlight: this.getGhostHighlight(scaledPosition, image, this.props.scale, this.props.rotate)
                         },
                         () => {
                           resetSelection();
@@ -607,6 +606,71 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
         </div>
       </Pointable>
     );
+  }
+
+  getGhostHighlight(scaledPosition, image, scale, rotate) {
+    let boundingRect = scaledPosition.boundingRect;
+
+    console.log("bound init" + JSON.stringify(boundingRect));
+    if (rotate === 0){
+      //
+    }
+
+    if (rotate === 90) {
+      let x1 = boundingRect.x1;
+      let y1 = boundingRect.y1;
+      let x2 = boundingRect.x2;
+      let y2 = boundingRect.y2;
+      let width = boundingRect.width;
+      let height = boundingRect.height;
+
+      boundingRect.x1 = y1;
+      boundingRect.y1 = Math.abs(x2 - width)
+      boundingRect.x2 = y2;
+      boundingRect.y2 =  Math.abs(x1 - width)
+      boundingRect.width = height;
+      boundingRect.height = width;
+    }
+
+    if (rotate === -90){
+      let x1 = boundingRect.x1;
+      let y1 = boundingRect.y1;
+      let x2 = boundingRect.x2;
+      let y2 = boundingRect.y2;
+      let width = boundingRect.width;
+      let height = boundingRect.height;
+
+      // debugger;
+      boundingRect.x1 = Math.abs(y2 - height);
+      boundingRect.y2 = width -  Math.abs(x2 - width)
+      boundingRect.x2 =  Math.abs(y1 - height);
+      boundingRect.y1 = width - Math.abs(x1 - width)
+      boundingRect.width = height;
+      boundingRect.height = width;
+    }
+
+    if (rotate === -180 || rotate === 180){
+      let x1 = boundingRect.x1;
+      let y1 = boundingRect.y1;
+      let x2 = boundingRect.x2;
+      let y2 = boundingRect.y2;
+      let width = boundingRect.width;
+      let height = boundingRect.height;
+
+      boundingRect.x1 = Math.abs(x2-width);
+      boundingRect.y1 = Math.abs(y2-height);
+      boundingRect.x2 = Math.abs(x1-width);
+      boundingRect.y2 = Math.abs(y1-height);
+      boundingRect.width = width;
+      boundingRect.height = height;
+    }
+    scaledPosition.boundingRect = boundingRect
+
+    console.log("bound result" + JSON.stringify(boundingRect))
+    return {
+      position: scaledPosition,
+      content: {image}
+    };
   }
 }
 
