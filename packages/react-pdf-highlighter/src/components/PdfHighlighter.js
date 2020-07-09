@@ -239,12 +239,16 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }
 
   scale(scale,relativeRotation) {
-    this.viewer.currentScaleValue = scale
+    this.viewer.currentScaleValue = scale;
     this.viewer.pagesRotation = relativeRotation
   }
 
   screenshot(position: T_LTWH, pageNumber: number) {
     const canvas = this.viewer.getPageView(pageNumber - 1).canvas;
+    position.height = position.height / this.props.scale;
+    position.width = position.width / this.props.scale;
+    position.left = position.left / this.props.scale;
+    position.top = position.top / this.props.scale;
     return getAreaAsPng(canvas, position);
   }
 
