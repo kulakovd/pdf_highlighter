@@ -385,7 +385,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
           scaledToViewport(boundingRect, pageViewport, usePdfCoordinates, currentScaleValue, pagesRotation).top -
             scrollMargin
         ),
-        0
+        currentScaleValue
       ]
     });
 
