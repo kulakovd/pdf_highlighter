@@ -7,14 +7,15 @@ type T_ManuscriptHighlight = T_Highlight;
 
 type Props = {
   highlights: Array<T_ManuscriptHighlight>,
-  resetHighlights: () => void
+  resetHighlights: () => void,
+    removeHighlight: (highlight: T_ManuscriptHighlight) => void
 };
 
 const updateHash = highlight => {
   document.location.hash = `highlight-${highlight.id}`;
 };
 
-function Sidebar({ highlights, resetHighlights }: Props) {
+function Sidebar({ highlights, resetHighlights, removeHighlight }: Props) {
   return (
     <div className="sidebar" style={{ width: "25vw" }}>
       <div className="description" style={{ padding: "1rem" }}>
@@ -49,6 +50,10 @@ function Sidebar({ highlights, resetHighlights }: Props) {
                   style={{ marginTop: "0.5rem" }}
                 >
                   <img src={highlight.content.image} alt={"Screenshot"} />
+
+                    <img onClick={() => {
+                        removeHighlight(highlight);
+                    }} alt={"Remove"} />
                 </div>
               ) : null}
             </div>
