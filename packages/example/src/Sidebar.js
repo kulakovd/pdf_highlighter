@@ -52,16 +52,15 @@ function Sidebar({ highlights, resetHighlights, removeHighlight }: Props) {
                         >
                             <img src={highlight.content.image} alt={"Screenshot"} />
                         </div>
-
-                      <div>
-                          <button onClick={() => {
-                              removeHighlight(highlight);
-                          }}>Remove</button>
-                      </div>
                   </div>
 
               ) : null}
             </div>
+              <div>
+                  <button onClick={() => {
+                      removeHighlight(highlight);
+                  }}>Remove</button>
+              </div>
             <div className="highlight__location">
               Страница {highlight.position.pageNumber}
             </div>
