@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/pdf_highlighter/static/css/main.765757f6.chunk.css",
-    "main.js": "/pdf_highlighter/static/js/main.1104f5a5.chunk.js",
+    "main.js": "/pdf_highlighter/static/js/main.7b105e67.chunk.js",
     "runtime-main.js": "/pdf_highlighter/static/js/runtime-main.d34b4dd2.js",
     "static/css/2.6f044389.chunk.css": "/pdf_highlighter/static/css/2.6f044389.chunk.css",
-    "static/js/2.40456c10.chunk.js": "/pdf_highlighter/static/js/2.40456c10.chunk.js",
+    "static/js/2.f6143ffa.chunk.js": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js",
     "index.html": "/pdf_highlighter/index.html",
-    "precache-manifest.480c378d1e177a8834e3bb38dc02af43.js": "/pdf_highlighter/precache-manifest.480c378d1e177a8834e3bb38dc02af43.js",
+    "precache-manifest.e26ff6fb7253feedb81f22308ca9a5f1.js": "/pdf_highlighter/precache-manifest.e26ff6fb7253feedb81f22308ca9a5f1.js",
     "service-worker.js": "/pdf_highlighter/service-worker.js",
-    "static/js/2.40456c10.chunk.js.LICENSE": "/pdf_highlighter/static/js/2.40456c10.chunk.js.LICENSE",
+    "static/js/2.f6143ffa.chunk.js.LICENSE": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js.LICENSE",
     "static/media/material-icons.css": "/pdf_highlighter/static/media/MaterialIcons-Regular.e79bfd88.eot"
   },
   "entrypoints": [
     "static/js/runtime-main.d34b4dd2.js",
     "static/css/2.6f044389.chunk.css",
-    "static/js/2.40456c10.chunk.js",
+    "static/js/2.f6143ffa.chunk.js",
     "static/css/main.765757f6.chunk.css",
-    "static/js/main.1104f5a5.chunk.js"
+    "static/js/main.7b105e67.chunk.js"
   ]
 }
