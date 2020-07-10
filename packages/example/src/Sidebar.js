@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-
 import type { T_Highlight } from "react-pdf-highlighter/src/types";
 type T_ManuscriptHighlight = T_Highlight;
 
@@ -45,16 +44,22 @@ function Sidebar({ highlights, resetHighlights, removeHighlight }: Props) {
                 </blockquote>
               ) : null}
               {highlight.content.image ? (
-                <div
-                  className="highlight__image"
-                  style={{ marginTop: "0.5rem" }}
-                >
-                  <img src={highlight.content.image} alt={"Screenshot"} />
+                  <div>
 
-                    <img onClick={() => {
-                        removeHighlight(highlight);
-                    }} alt={"Remove"} />
-                </div>
+                        <div
+                         className="highlight__image"
+                        style={{ marginTop: "0.5rem" }}
+                        >
+                            <img src={highlight.content.image} alt={"Screenshot"} />
+                        </div>
+
+                      <div>
+                          <button onClick={() => {
+                              removeHighlight(highlight);
+                          }}>Remove</button>
+                      </div>
+                  </div>
+
               ) : null}
             </div>
             <div className="highlight__location">
