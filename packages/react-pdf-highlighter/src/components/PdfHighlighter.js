@@ -175,7 +175,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     highlights: Array<T_HT>
   ): { [pageNumber: string]: Array<T_HT> } {
     const { ghostHighlight } = this.state;
-    console.log("ghostHighlight:" + JSON.stringify(ghostHighlight) )
     return [...highlights, ghostHighlight]
       .filter(Boolean)
       .reduce((res, highlight) => {
@@ -263,7 +262,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
     const highlightsByPage = this.groupHighlightsByPage(highlights);
 
-    console.log("highlightsByPage: " + JSON.stringify(highlightsByPage))
     for (let pageNumber = 1; pageNumber <= pdfDocument.numPages; pageNumber++) {
       const highlightLayer = this.findOrCreateHighlightLayer(pageNumber);
 
@@ -496,7 +494,72 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     const scaledPosition = this.viewportPositionToScaled(viewportPosition);
 
     function getGhostHighlight(scale, rotate) {
-      return {position: scaledPosition};
+
+      console.log("bound init" + JSON.stringify(scaledPosition));
+      debugger;
+      let position = extracted(rotate, scaledPosition);
+      console.log("bound result" + JSON.stringify(scaledPosition));
+      return {position: position};
+    }
+
+    function extracted(rotate, boundingRect) {
+      if (rotate === 0) {
+        //
+      }
+
+      if (rotate === 90) {
+        let x1 = boundingRect.x1;
+        let y1 = boundingRect.y1;
+        let x2 = boundingRect.x2;
+        let y2 = boundingRect.y2;
+        let width = boundingRect.width;
+        let height = boundingRect.height;
+
+        boundingRect.x1 = y1;
+        boundingRect.y1 = Math.abs(x2 - width)
+        boundingRect.x2 = y2;
+        boundingRect.y2 = Math.abs(x1 - width)
+        boundingRect.width = height;
+        boundingRect.height = width;
+      }
+
+      if (rotate === -90) {
+        let x1 = boundingRect.x1;
+        let y1 = boundingRect.y1;
+        let x2 = boundingRect.x2;
+        let y2 = boundingRect.y2;
+        let width = boundingRect.width;
+        let height = boundingRect.height;
+
+        // debugger;
+        boundingRect.x1 = Math.abs(y2 - height);
+        boundingRect.y2 = width - Math.abs(x2 - width)
+        boundingRect.x2 = Math.abs(y1 - height);
+        boundingRect.y1 = width - Math.abs(x1 - width)
+        boundingRect.width = height;
+        boundingRect.height = width;
+      }
+
+      if (rotate === -180 || rotate === 180) {
+        let x1 = boundingRect.x1;
+        let y1 = boundingRect.y1;
+        let x2 = boundingRect.x2;
+        let y2 = boundingRect.y2;
+        let width = boundingRect.width;
+        let height = boundingRect.height;
+
+        boundingRect.x1 = Math.abs(x2 - width);
+        boundingRect.y1 = Math.abs(y2 - height);
+        boundingRect.x2 = Math.abs(x1 - width);
+        boundingRect.y2 = Math.abs(y1 - height);
+        boundingRect.width = width;
+        boundingRect.height = height;
+      }
+
+      if (boundingRect.rects) {
+        boundingRect.rects = boundingRect.rects.map(e => extracted(rotate, e))
+      }
+      return boundingRect
     }
 
 
@@ -575,8 +638,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                 const copyScaledPosition = JSON.parse(JSON.stringify(scaledPosition)) ;
                 const ghostHighlight = this.getGhostHighlight(copyScaledPosition, "", this.props.scale, this.props.rotate).position;
 
-                console.log("pageBoundingRect "+JSON.stringify(pageBoundingRect))
-                console.log("ghostHighlight "+JSON.stringify(ghostHighlight))
                 let screenShotRect = {
                   left: ghostHighlight.boundingRect.x1,
                   top: ghostHighlight.boundingRect.y1,
@@ -615,8 +676,17 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   getGhostHighlight(scaledPosition, image, scale, rotate) {
     let boundingRect = scaledPosition.boundingRect;
 
-    console.log("bound init" + JSON.stringify(boundingRect));
-    if (rotate === 0){
+
+    scaledPosition.boundingRect = this.extracted(rotate, boundingRect);
+
+    return {
+      position: scaledPosition,
+      content: {image}
+    };
+  }
+
+  extracted(rotate, boundingRect) {
+    if (rotate === 0) {
       //
     }
 
@@ -631,12 +701,12 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       boundingRect.x1 = y1;
       boundingRect.y1 = Math.abs(x2 - width)
       boundingRect.x2 = y2;
-      boundingRect.y2 =  Math.abs(x1 - width)
+      boundingRect.y2 = Math.abs(x1 - width)
       boundingRect.width = height;
       boundingRect.height = width;
     }
 
-    if (rotate === -90){
+    if (rotate === -90) {
       let x1 = boundingRect.x1;
       let y1 = boundingRect.y1;
       let x2 = boundingRect.x2;
@@ -646,14 +716,14 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
       // debugger;
       boundingRect.x1 = Math.abs(y2 - height);
-      boundingRect.y2 = width -  Math.abs(x2 - width)
-      boundingRect.x2 =  Math.abs(y1 - height);
+      boundingRect.y2 = width - Math.abs(x2 - width)
+      boundingRect.x2 = Math.abs(y1 - height);
       boundingRect.y1 = width - Math.abs(x1 - width)
       boundingRect.width = height;
       boundingRect.height = width;
     }
 
-    if (rotate === -180 || rotate === 180){
+    if (rotate === -180 || rotate === 180) {
       let x1 = boundingRect.x1;
       let y1 = boundingRect.y1;
       let x2 = boundingRect.x2;
@@ -661,20 +731,15 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       let width = boundingRect.width;
       let height = boundingRect.height;
 
-      boundingRect.x1 = Math.abs(x2-width);
-      boundingRect.y1 = Math.abs(y2-height);
-      boundingRect.x2 = Math.abs(x1-width);
-      boundingRect.y2 = Math.abs(y1-height);
+      boundingRect.x1 = Math.abs(x2 - width);
+      boundingRect.y1 = Math.abs(y2 - height);
+      boundingRect.x2 = Math.abs(x1 - width);
+      boundingRect.y2 = Math.abs(y1 - height);
       boundingRect.width = width;
       boundingRect.height = height;
     }
-    scaledPosition.boundingRect = boundingRect
 
-    console.log("bound result" + JSON.stringify(boundingRect))
-    return {
-      position: scaledPosition,
-      content: {image}
-    };
+    return boundingRect
   }
 }
 

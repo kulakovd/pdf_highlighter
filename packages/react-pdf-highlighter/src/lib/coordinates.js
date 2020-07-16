@@ -108,7 +108,6 @@ export const scaledToViewport = (
         };
     };
 
-    console.log("Coords:"+JSON.stringify(coords));
     return coords;
 
 };
