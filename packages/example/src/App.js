@@ -160,7 +160,7 @@ class App extends Component<Props, State> {
         const {highlights, rotate, scale} = this.state;
         localStorage.setItem(url, JSON.stringify(highlights));
         return (
-            <div className="App" style={{display: "flex", height: "100vh"}}>
+            <div className="App" style={{display: "flex", height: "100vh", backgroundColor: "gray"}}>
                 <SplitterLayout>
                     <div
                         style={{
