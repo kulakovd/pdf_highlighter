@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/pdf_highlighter/static/css/main.765757f6.chunk.css",
-    "main.js": "/pdf_highlighter/static/js/main.8177c08b.chunk.js",
+    "main.js": "/pdf_highlighter/static/js/main.ca384ae0.chunk.js",
     "runtime-main.js": "/pdf_highlighter/static/js/runtime-main.d34b4dd2.js",
     "static/css/2.6f044389.chunk.css": "/pdf_highlighter/static/css/2.6f044389.chunk.css",
     "static/js/2.f6143ffa.chunk.js": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js",
     "index.html": "/pdf_highlighter/index.html",
-    "precache-manifest.3b60c5f21618a6744c8005bd6e61c0fd.js": "/pdf_highlighter/precache-manifest.3b60c5f21618a6744c8005bd6e61c0fd.js",
+    "precache-manifest.a497e4e5c282f500360cab9d58a4102c.js": "/pdf_highlighter/precache-manifest.a497e4e5c282f500360cab9d58a4102c.js",
     "service-worker.js": "/pdf_highlighter/service-worker.js",
     "static/js/2.f6143ffa.chunk.js.LICENSE": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js.LICENSE",
     "static/media/material-icons.css": "/pdf_highlighter/static/media/MaterialIcons-Regular.e79bfd88.eot"
@@ -16,6 +16,6 @@
     "static/css/2.6f044389.chunk.css",
     "static/js/2.f6143ffa.chunk.js",
     "static/css/main.765757f6.chunk.css",
-    "static/js/main.8177c08b.chunk.js"
+    "static/js/main.ca384ae0.chunk.js"
   ]
 }
