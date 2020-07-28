@@ -369,9 +369,9 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
     const pageViewport = this.viewer.getPageView(pageNumber - 1).viewport;
 
+    // console.log("pageview:" + JSON.stringify(this.viewer.getPageView(pageNumber - 1).pageViewport.height))
     const scrollMargin = 10;
 
-    console.log("pageViewport:"+JSON.stringify(pageViewport))
     let currentScaleValue = this.viewer.currentScaleValue;
     let pagesRotation = this.viewer.pagesRotation;
     let x = 0;
@@ -381,7 +381,10 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
     } else if (pagesRotation === 90 || pagesRotation === -90) {
       convertToPdfPoint = pageViewport.convertToPdfPoint(y, x);
-    }  else if (pagesRotation === -180){
+    }  else if (pagesRotation === -180 || pagesRotation === 180){
+      // debugger;
+      // let height = this.viewer.getPageView(pageNumber - 1).pageViewport.height;
+      // console.log("height:" + height)
       convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
     }
 
