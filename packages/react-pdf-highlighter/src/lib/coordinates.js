@@ -99,7 +99,7 @@ export const scaledToViewport = (
 
         const x2 = (width * (scaled.width - scaled.x1)) / scaled.height / currentScaleValue;
         const y1 = (height * (scaled.height-scaled.y2)) / scaled.width / currentScaleValue;
-        debugger;
+
          coords =  {
             left: x1,
             top: y1,

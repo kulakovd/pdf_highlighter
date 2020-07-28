@@ -371,18 +371,27 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
     const scrollMargin = 10;
 
+    console.log("pageViewport:"+JSON.stringify(pageViewport))
     let currentScaleValue = this.viewer.currentScaleValue;
     let pagesRotation = this.viewer.pagesRotation;
+    let x = 0;
+    let y = scaledToViewport(boundingRect, pageViewport, usePdfCoordinates, currentScaleValue, pagesRotation).top - scrollMargin;
+    let convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
+    if (pagesRotation === undefined || pagesRotation === 0) {
+      convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
+    } else if (pagesRotation === 90 || pagesRotation === -90) {
+      convertToPdfPoint = pageViewport.convertToPdfPoint(y, x);
+    }  else if (pagesRotation === -180){
+      convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
+    }
+
+    console.log("convertToPdfPoint: "+ JSON.stringify(convertToPdfPoint))
     this.viewer.scrollPageIntoView({
       pageNumber,
       destArray: [
         null,
         { name: "XYZ" },
-        ...pageViewport.convertToPdfPoint(
-          0,
-          scaledToViewport(boundingRect, pageViewport, usePdfCoordinates, currentScaleValue, pagesRotation).top -
-            scrollMargin
-        ),
+        ...convertToPdfPoint,
         currentScaleValue
       ]
     });
@@ -495,10 +504,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
     function getGhostHighlight(scale, rotate) {
 
-      console.log("bound init" + JSON.stringify(scaledPosition));
-      debugger;
       let position = extracted(rotate, scaledPosition);
-      console.log("bound result" + JSON.stringify(scaledPosition));
       return {position: position};
     }
 
@@ -531,7 +537,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
         let width = boundingRect.width;
         let height = boundingRect.height;
 
-        // debugger;
         boundingRect.x1 = Math.abs(y2 - height);
         boundingRect.y2 = width - Math.abs(x2 - width)
         boundingRect.x2 = Math.abs(y1 - height);
@@ -714,7 +719,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       let width = boundingRect.width;
       let height = boundingRect.height;
 
-      // debugger;
       boundingRect.x1 = Math.abs(y2 - height);
       boundingRect.y2 = width - Math.abs(x2 - width)
       boundingRect.x2 = Math.abs(y1 - height);
