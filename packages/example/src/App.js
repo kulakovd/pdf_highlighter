@@ -84,6 +84,17 @@ class App extends Component<Props, State> {
         });
     };
 
+    removeHighlight= (e) => {
+        const array = [...this.state.highlights];
+        const index = array.indexOf(e);
+        if (index !== -1) {
+            array.splice(index, 1);
+            this.setState({
+                ...this.state, highlights: array
+            });
+        }
+    }
+
 
     setRotation = (angle) =>{
         this.setState({
@@ -149,7 +160,7 @@ class App extends Component<Props, State> {
         const {highlights, rotate, scale} = this.state;
         localStorage.setItem(url, JSON.stringify(highlights));
         return (
-            <div className="App" style={{display: "flex", height: "100vh"}}>
+            <div className="App" style={{display: "flex", height: "100vh", backgroundColor: "gray"}}>
                 <SplitterLayout>
                     <div
                         style={{
@@ -253,6 +264,7 @@ class App extends Component<Props, State> {
                     <Sidebar
                         highlights={highlights}
                         resetHighlights={this.resetHighlights}
+                        removeHighlight={this.removeHighlight}
                         rotate={this.rotate}
                         scale={this.scale}
                     />
