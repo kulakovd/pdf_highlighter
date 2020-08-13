@@ -24,9 +24,12 @@ class Popup extends Component<Props, State> {
 
   render() {
     const { onMouseOver, popupContent, onMouseOut, rotate,scale } = this.props;
+    const style = {position: 'absolute'};
 
     return (
       <div
+        className="full-size"
+        style={style}
         onMouseOver={() => {
           this.setState({ mouseIn: true });
 
