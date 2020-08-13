@@ -225,6 +225,8 @@ class App extends Component<Props, State> {
                                                 isScrolledTo={isScrolledTo}
                                                 position={highlight.position}
                                                 comment={highlight.comment}
+                                                rotate={rotate}
+                                                scale={scale}
                                             />
                                         ) : (
                                             <AreaHighlight

@@ -267,7 +267,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
       if (highlightLayer) {
         ReactDom.render(
-          <div>
+          <div className="full-size">
             {(highlightsByPage[String(pageNumber)] || []).map(
               (highlight, index) => {
                 const { position, ...rest } = highlight;
