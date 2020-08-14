@@ -61,7 +61,8 @@ class TransformWrapper extends Component<Props, State> {
     if (rotate === -90 && parentRotate === 270) {
       finalRot = 180;
     }
-    return `rotate(${finalRot}deg) scale(${parentScale}, ${parentScale}) translate(${x}px, ${y}px)`;
+    scale /= parentScale;
+    return `rotate(${finalRot}deg) scale(${scale}, ${scale}) translate(${x}px, ${y}px)`;
   }
 
   getOffsets(rotate: number, parentRotate: number, rect: ClientRect): [number, number] {
