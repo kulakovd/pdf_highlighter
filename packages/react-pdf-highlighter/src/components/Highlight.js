@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import "../style/Highlight.css";
 
 import type { T_LTWH } from "../types.js";
+import TransformWrapper from "./TransformWrapper";
 
 type Props = {
   position: {
@@ -18,7 +19,9 @@ type Props = {
     emoji: string,
     text: string
   },
-  isScrolledTo: boolean
+  isScrolledTo: boolean,
+  rotate: number,
+  scale: number
 };
 
 class Highlight extends Component<Props> {
@@ -29,39 +32,43 @@ class Highlight extends Component<Props> {
       onMouseOver,
       onMouseOut,
       comment,
-      isScrolledTo
+      isScrolledTo,
+      rotate,
+      scale
     } = this.props;
 
     const { rects, boundingRect } = position;
 
     return (
-      <div
-        className={`Highlight ${isScrolledTo ? "Highlight--scrolledTo" : ""}`}
-      >
-        {comment ? (
-          <div
-            className="Highlight__emoji"
-            style={{
-              left: 20,
-              top: boundingRect.top
-            }}
-          >
-            {comment.emoji}
-          </div>
-        ) : null}
-        <div className="Highlight__parts">
-          {rects.map((rect, index) => (
+      <TransformWrapper rotate={rotate} scale={scale}>
+        <div
+          className={`Highlight ${isScrolledTo ? "Highlight--scrolledTo" : ""}`}
+        >
+          {comment ? (
             <div
-              onMouseOver={onMouseOver}
-              onMouseOut={onMouseOut}
-              onClick={onClick}
-              key={index}
-              style={rect}
-              className={`Highlight__part`}
-            />
-          ))}
+              className="Highlight__emoji"
+              style={{
+                left: 20,
+                top: boundingRect.top
+              }}
+            >
+              {comment.emoji}
+            </div>
+          ) : null}
+          <div className="Highlight__parts">
+            {rects.map((rect, index) => (
+              <div
+                onMouseOver={onMouseOver}
+                onMouseOut={onMouseOut}
+                onClick={onClick}
+                key={index}
+                style={rect}
+                className={`Highlight__part`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </TransformWrapper>
     );
   }
 }
