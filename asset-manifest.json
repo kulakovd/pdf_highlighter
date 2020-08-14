@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/pdf_highlighter/static/css/main.765757f6.chunk.css",
-    "main.js": "/pdf_highlighter/static/js/main.048f128a.chunk.js",
+    "main.css": "/pdf_highlighter/static/css/main.b89bd1cf.chunk.css",
+    "main.js": "/pdf_highlighter/static/js/main.b9d123f9.chunk.js",
     "runtime-main.js": "/pdf_highlighter/static/js/runtime-main.d34b4dd2.js",
-    "static/css/2.6f044389.chunk.css": "/pdf_highlighter/static/css/2.6f044389.chunk.css",
-    "static/js/2.f6143ffa.chunk.js": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js",
+    "static/css/2.58a28801.chunk.css": "/pdf_highlighter/static/css/2.58a28801.chunk.css",
+    "static/js/2.004bdde5.chunk.js": "/pdf_highlighter/static/js/2.004bdde5.chunk.js",
     "index.html": "/pdf_highlighter/index.html",
-    "precache-manifest.8e1e3f24ebe514254cc4a20365e29778.js": "/pdf_highlighter/precache-manifest.8e1e3f24ebe514254cc4a20365e29778.js",
+    "precache-manifest.cc23d91cae80d5efc0e93eb476cf5a9b.js": "/pdf_highlighter/precache-manifest.cc23d91cae80d5efc0e93eb476cf5a9b.js",
     "service-worker.js": "/pdf_highlighter/service-worker.js",
-    "static/js/2.f6143ffa.chunk.js.LICENSE": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js.LICENSE",
+    "static/js/2.004bdde5.chunk.js.LICENSE": "/pdf_highlighter/static/js/2.004bdde5.chunk.js.LICENSE",
     "static/media/material-icons.css": "/pdf_highlighter/static/media/MaterialIcons-Regular.e79bfd88.eot"
   },
   "entrypoints": [
     "static/js/runtime-main.d34b4dd2.js",
-    "static/css/2.6f044389.chunk.css",
-    "static/js/2.f6143ffa.chunk.js",
-    "static/css/main.765757f6.chunk.css",
-    "static/js/main.048f128a.chunk.js"
+    "static/css/2.58a28801.chunk.css",
+    "static/js/2.004bdde5.chunk.js",
+    "static/css/main.b89bd1cf.chunk.css",
+    "static/js/main.b9d123f9.chunk.js"
   ]
 }

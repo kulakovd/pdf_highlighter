@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1369a6fd96a3339653f29937fd117b76",
+    "revision": "821cc34b31406974912506e13c37cb6b",
     "url": "/pdf_highlighter/index.html"
   },
   {
-    "revision": "2ae09ce5083010c49fd8",
-    "url": "/pdf_highlighter/static/css/2.6f044389.chunk.css"
+    "revision": "b32c5e6c257fe7a7719c",
+    "url": "/pdf_highlighter/static/css/2.58a28801.chunk.css"
   },
   {
-    "revision": "2ffc471b7ef11ff299b8",
-    "url": "/pdf_highlighter/static/css/main.765757f6.chunk.css"
+    "revision": "b3ca6e26741919073cb2",
+    "url": "/pdf_highlighter/static/css/main.b89bd1cf.chunk.css"
   },
   {
-    "revision": "2ae09ce5083010c49fd8",
-    "url": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js"
+    "revision": "b32c5e6c257fe7a7719c",
+    "url": "/pdf_highlighter/static/js/2.004bdde5.chunk.js"
   },
   {
     "revision": "b02398fe302ba4ef3803015f2c370d5c",
-    "url": "/pdf_highlighter/static/js/2.f6143ffa.chunk.js.LICENSE"
+    "url": "/pdf_highlighter/static/js/2.004bdde5.chunk.js.LICENSE"
   },
   {
-    "revision": "2ffc471b7ef11ff299b8",
-    "url": "/pdf_highlighter/static/js/main.048f128a.chunk.js"
+    "revision": "b3ca6e26741919073cb2",
+    "url": "/pdf_highlighter/static/js/main.b9d123f9.chunk.js"
   },
   {
     "revision": "2a07cac83068a19310c7",
