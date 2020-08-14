@@ -44,7 +44,7 @@ class TransformWrapper extends Component<Props, State> {
     const { transform } = parent.style;
     const rotateMatch = transform.match(/rotate\(-?(\d+)deg\)/);
     const parentRotate = rotateMatch && +rotateMatch[1] || 0;
-    const scaleMatch = transform.match(/scale\(([\d.]+),/);
+    const scaleMatch = transform.match(/scale\(([\d.]+)/);
     const parentScale = scaleMatch && +scaleMatch[1] || 1;
     const rect = parent.getBoundingClientRect();
     const [x, y] = this.getOffsets(rotate, parentRotate, rect) || [0, 0];
@@ -62,7 +62,7 @@ class TransformWrapper extends Component<Props, State> {
       finalRot = 180;
     }
     scale /= parentScale;
-    return `rotate(${finalRot}deg) scale(${scale}, ${scale}) translate(${x}px, ${y}px)`;
+    return `rotate(${finalRot}deg) scale(${scale}) translate(${x}px, ${y}px)`;
   }
 
   getOffsets(rotate: number, parentRotate: number, rect: ClientRect): [number, number] {
