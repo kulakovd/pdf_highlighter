@@ -388,15 +388,15 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
     }
 
-    console.log("convertToPdfPoint: "+ JSON.stringify(convertToPdfPoint))
+    // console.log("convertToPdfPoint: "+ JSON.stringify(convertToPdfPoint))
     this.viewer.scrollPageIntoView({
-      pageNumber,
-      destArray: [
-        null,
-        { name: "XYZ" },
-        ...convertToPdfPoint,
-        currentScaleValue
-      ]
+      pageNumber
+      // destArray: [
+      //   null,
+      //   { name: "XYZ" },
+      //   ...convertToPdfPoint,
+      //   currentScaleValue
+      // ]
     });
 
     this.setState(
