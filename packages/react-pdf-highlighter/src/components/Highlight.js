@@ -40,35 +40,33 @@ class Highlight extends Component<Props> {
     const { rects, boundingRect } = position;
 
     return (
-      <TransformWrapper rotate={rotate} scale={scale}>
-        <div
-          className={`Highlight ${isScrolledTo ? "Highlight--scrolledTo" : ""}`}
-        >
-          {comment ? (
-            <div
-              className="Highlight__emoji"
-              style={{
-                left: 20,
-                top: boundingRect.top
-              }}
-            >
-              {comment.emoji}
-            </div>
-          ) : null}
-          <div className="Highlight__parts">
-            {rects.map((rect, index) => (
-              <div
-                onMouseOver={onMouseOver}
-                onMouseOut={onMouseOut}
-                onClick={onClick}
-                key={index}
-                style={rect}
-                className={`Highlight__part`}
-              />
-            ))}
+      <div
+        className={`Highlight ${isScrolledTo ? "Highlight--scrolledTo" : ""}`}
+      >
+        {comment ? (
+          <div
+            className="Highlight__emoji"
+            style={{
+              left: 20,
+              top: boundingRect.top
+            }}
+          >
+            {comment.emoji}
           </div>
+        ) : null}
+        <div className="Highlight__parts">
+          {rects.map((rect, index) => (
+            <div
+              onMouseOver={onMouseOver}
+              onMouseOut={onMouseOut}
+              onClick={onClick}
+              key={index}
+              style={rect}
+              className={`Highlight__part`}
+            />
+          ))}
         </div>
-      </TransformWrapper>
+      </div>
     );
   }
 }
