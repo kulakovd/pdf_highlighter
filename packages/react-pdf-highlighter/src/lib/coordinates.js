@@ -49,72 +49,36 @@ const pdfToViewport = (pdf, viewport, currentScaleValue: string,
 export const scaledToViewport = (
     scaled: T_Scaled,
     viewport: T_VIEWPORT,
-    usePdfCoordinates: boolean = false,
-    currentScaleValue: string,
-    rotation: string
+    scale: number,
+    rotation: number,
+    usePdfCoordinates: boolean = false
 ): T_LTWH => {
-    const {width, height} = viewport;
-
     if (usePdfCoordinates) {
-        return pdfToViewport(scaled, viewport, currentScaleValue, rotation);
+        return pdfToViewport(scaled, viewport, scale, rotation);
     }
 
-    if (scaled.x1 === undefined) {
-        throw new Error("You are using old position format, please update");
+    const {x1, x2, y1, y2} = scaled;
+    const w = x2 - x1;
+    const h = y2 - y1;
+    const absRot = Math.abs(rotation);
+    const {width: vWidth, height: vHeight} = viewport;
+    let left = x1 * scale;
+    let top = y1 * scale;
+    switch (rotation) {
+        case -90:
+            left = top;
+            top = vHeight - x2 * scale;
+            break;
+        case 90:
+            top = left;
+            left = vWidth - y2 * scale;
+            break;
+        case 180: case -180:
+            left = vWidth - x2 * scale;
+            top = vHeight - y2 * scale;
+            break;
     }
-
-
-    let coords;
-
-    if (rotation === 0 || rotation ===180 || rotation ===-180) {
-        const x1 = (width * scaled.x1) / scaled.width / currentScaleValue;
-        const y1 = (height * scaled.y1) / scaled.height / currentScaleValue;
-
-        const x2 = (width * scaled.x2) / scaled.width / currentScaleValue;
-        const y2 = (height * scaled.y2) / scaled.height / currentScaleValue;
-        coords = {
-            left: x1,
-            top: y1,
-            width: x2 - x1,
-            height: y2 - y1
-        };
-    }
-
-    if (rotation === 90) {
-        const x1 = (width * scaled.x1) / scaled.height / currentScaleValue;
-        const y1 = (height * scaled.y1) / scaled.width / currentScaleValue;
-
-        const x2 = (width * scaled.x2) / scaled.height / currentScaleValue;
-        const y2 = (height * scaled.y2) / scaled.width / currentScaleValue;
-        coords =  {
-            left: x1,
-            top: y1,
-            width: x2 - x1,
-            height: y2 - y1
-        };
-    }
-    if (rotation === -90){
-        const x1 = (width * (scaled.width - scaled.x2)) / scaled.height / currentScaleValue;
-        const y2 = (height * (scaled.height-scaled.y1)) / scaled.width / currentScaleValue;
-
-        const x2 = (width * (scaled.width - scaled.x1)) / scaled.height / currentScaleValue;
-        const y1 = (height * (scaled.height-scaled.y2)) / scaled.width / currentScaleValue;
-
-         coords =  {
-            left: x1,
-            top: y1,
-            width: x2 - x1,
-            height: y2 - y1
-        };
-    };
-
-    return coords;
-
+    const height = (absRot === 90 ? w : h) * scale;
+    const width = (absRot === 90 ? h : w) * scale;
+    return {height, width, left, top};
 };
-
-// const x1 = (width * scaled.x1) / scaled.height / currentScaleValue;
-// const y1 = (height * (scaled.height-scaled.y1)) / scaled.width / currentScaleValue;
-//
-// const x2 = (width * scaled.x2) / scaled.height / currentScaleValue;
-// const y2 = (height * (scaled.height-scaled.y2)) / scaled.width / currentScaleValue;
-//
