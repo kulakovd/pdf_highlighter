@@ -161,7 +161,7 @@ class App extends Component<Props, State> {
         localStorage.setItem(url, JSON.stringify(highlights));
         return (
             <div className="App" style={{display: "flex", height: "100vh", backgroundColor: "gray"}}>
-                <SplitterLayout>
+                <SplitterLayout secondaryInitialSize={465}>
                     <div
                         style={{
                             height: "100vh",
