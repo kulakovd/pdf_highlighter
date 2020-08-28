@@ -417,9 +417,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     }
 
     let offset = 0;
-
-    //console.log("pagesRotation", pagesRotation, this);
-
+    // Deprecated
     switch (pagesRotation) {
       case 0:
         offset = [
@@ -454,16 +452,15 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
         break;
     }
 
-    // console.log("convertToPdfPoint: "+ JSON.stringify(convertToPdfPoint))
     this.viewer.scrollPageIntoView({
       pageNumber,
       destArray: [
         null,
         { name: "XYZ" },
-        //...convertToPdfPoint,
-        ...offset,
+        ...convertToPdfPoint,
         currentScaleValue
-      ]
+      ],
+      allowNegativeOffset: false
     });
 
     this.setState(
@@ -713,7 +710,10 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                 const scaledPosition = this.viewportPositionToScaled(
                   viewportPosition
                 );
-                const image = this.screenshot(viewportPosition.boundingRect, page.number);
+                const image = this.screenshot(
+                  viewportPosition.boundingRect,
+                  page.number
+                );
 
                 this.renderTipAtPosition(
                   viewportPosition,
