@@ -263,10 +263,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
   screenshot(position: T_LTWH, pageNumber: number) {
     const canvas = this.viewer.getPageView(pageNumber - 1).canvas;
-    position.height = position.height / this.props.scale;
-    position.width = position.width / this.props.scale;
-    position.left = position.left / this.props.scale;
-    position.top = position.top / this.props.scale;
     return getAreaAsPng(canvas, position);
   }
 
@@ -717,29 +713,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                 const scaledPosition = this.viewportPositionToScaled(
                   viewportPosition
                 );
-
-                const copyScaledPosition = JSON.parse(
-                  JSON.stringify(scaledPosition)
-                );
-                const ghostHighlight = this.getGhostHighlight(
-                  copyScaledPosition,
-                  "",
-                  this.props.scale,
-                  this.props.rotate
-                ).position;
-
-                let screenShotRect = {
-                  left: ghostHighlight.boundingRect.x1,
-                  top: ghostHighlight.boundingRect.y1,
-                  width:
-                    ghostHighlight.boundingRect.x2 -
-                    ghostHighlight.boundingRect.x1,
-                  height:
-                    ghostHighlight.boundingRect.y2 -
-                    ghostHighlight.boundingRect.y1
-                };
-
-                const image = this.screenshot(screenShotRect, page.number);
+                const image = this.screenshot(viewportPosition.boundingRect, page.number);
 
                 this.renderTipAtPosition(
                   viewportPosition,
@@ -772,71 +746,11 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     );
   }
 
-  getGhostHighlight(scaledPosition, image, scale, rotate) {
-    let boundingRect = scaledPosition.boundingRect;
-
-    scaledPosition.boundingRect = this.extracted(rotate, boundingRect);
-
+  getGhostHighlight(scaledPosition, image) {
     return {
       position: scaledPosition,
       content: { image }
     };
-  }
-
-  extracted(rotate, boundingRect) {
-    if (rotate === 0) {
-      //
-    }
-
-    if (rotate === 90) {
-      let x1 = boundingRect.x1;
-      let y1 = boundingRect.y1;
-      let x2 = boundingRect.x2;
-      let y2 = boundingRect.y2;
-      let width = boundingRect.width;
-      let height = boundingRect.height;
-
-      boundingRect.x1 = y1;
-      boundingRect.y1 = Math.abs(x2 - width);
-      boundingRect.x2 = y2;
-      boundingRect.y2 = Math.abs(x1 - width);
-      boundingRect.width = height;
-      boundingRect.height = width;
-    }
-
-    if (rotate === -90) {
-      let x1 = boundingRect.x1;
-      let y1 = boundingRect.y1;
-      let x2 = boundingRect.x2;
-      let y2 = boundingRect.y2;
-      let width = boundingRect.width;
-      let height = boundingRect.height;
-
-      boundingRect.x1 = Math.abs(y2 - height);
-      boundingRect.y2 = width - Math.abs(x2 - width);
-      boundingRect.x2 = Math.abs(y1 - height);
-      boundingRect.y1 = width - Math.abs(x1 - width);
-      boundingRect.width = height;
-      boundingRect.height = width;
-    }
-
-    if (rotate === -180 || rotate === 180) {
-      let x1 = boundingRect.x1;
-      let y1 = boundingRect.y1;
-      let x2 = boundingRect.x2;
-      let y2 = boundingRect.y2;
-      let width = boundingRect.width;
-      let height = boundingRect.height;
-
-      boundingRect.x1 = Math.abs(x2 - width);
-      boundingRect.y1 = Math.abs(y2 - height);
-      boundingRect.x2 = Math.abs(x1 - width);
-      boundingRect.y2 = Math.abs(y1 - height);
-      boundingRect.width = width;
-      boundingRect.height = height;
-    }
-
-    return boundingRect;
   }
 }
 

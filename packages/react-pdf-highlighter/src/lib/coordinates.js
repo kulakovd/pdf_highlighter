@@ -11,21 +11,35 @@ import type {T_LTWH, T_Scaled, T_VIEWPORT} from "../types";
 type WIDTH_HEIGHT = { width: number, height: number };
 
 export const viewportToScaled = (
-    rect: T_LTWH,
-    {width, height}: WIDTH_HEIGHT,
-    scale: string,
-    rotation: string
+    {left, top, width: w, height: h}: T_LTWH,
+    {width: vw, height: vh}: WIDTH_HEIGHT,
+    scale: number,
+    rotation: number
 ): T_Scaled => {
-    return {
-        x1: rect.left,
-        y1: rect.top,
-
-        x2: rect.left + rect.width,
-        y2: rect.top + rect.height,
-
-        width,
-        height
-    };
+    let x1 = left / scale;
+    let y1 = top / scale;
+    switch (rotation) {
+        case -180: case 180:
+            x1 = (vw - left - w) / scale;
+            y1 = (vh - top - h) / scale;
+            break;
+        case -90:
+            y1 = x1;
+            x1 = (vh - top - h) / scale;
+            break;
+        case 90:
+            x1 = y1;
+            y1 = (vw - left - w) / scale;
+            break;
+        default:
+            break;
+    }
+    const horizontal = Math.abs(rotation) === 90;
+    const height = (horizontal ? w : h) / scale;
+    const width = (horizontal ? h : w) / scale;
+    const x2 = x1 + width;
+    const y2 = y1 + height;
+    return {x1, x2, y1, y2, width, height};
 };
 
 const pdfToViewport = (pdf, viewport, currentScaleValue: string,
