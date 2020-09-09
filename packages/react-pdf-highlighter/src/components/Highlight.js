@@ -6,6 +6,7 @@ import "../style/Highlight.css";
 
 import type { T_LTWH } from "../types.js";
 import TransformWrapper from "./TransformWrapper";
+import { getEmojiStyle } from '../lib/coordinates';
 
 type Props = {
   position: {
@@ -46,10 +47,7 @@ class Highlight extends Component<Props> {
         {comment ? (
           <div
             className="Highlight__emoji"
-            style={{
-              left: 20,
-              top: boundingRect.top
-            }}
+            style={getEmojiStyle(boundingRect, rotate)}
           >
             {comment.emoji}
           </div>

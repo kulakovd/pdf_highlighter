@@ -96,3 +96,9 @@ export const scaledToViewport = (
     const width = (absRot === 90 ? h : w) * scale;
     return {height, width, left, top};
 };
+
+export const getEmojiStyle = (boundingRect: T_LTWH, rotate: number) => ({
+  left: 20,
+  top: boundingRect.top + boundingRect.height / 2 - 14
+});
+
