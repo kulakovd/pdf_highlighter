@@ -12,15 +12,19 @@
     "prepublishOnly": "npm run build && npm run copy-flow"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
-    "pdfjs-dist": "2.2.228",
-    "prop-types": "^15.7.2",
-    "react-pointable": "^1.1.1",
-    "react-rnd": "^7.1.5",
     "bootstrap": "^4.4.1",
     "bulma": "^0.8.1",
     "bulma-helpers": "^0.3.10",
-    "material-design-icons": "^3.0.1"
+    "lodash": "^4.17.10",
+    "material-design-icons": "^3.0.1",
+    "pdfjs-dist": "2.2.228",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-pointable": "^1.1.1",
+    "react-rnd": "^7.1.5",
+    "react-splitter-layout": "^4.0.0",
+    "url-search-params": "^1.1.0"
   },
   "peerDependencies": {
     "react": ">=0.14",
@@ -30,10 +34,18 @@
     "@babel/cli": "^7.8.3",
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
     "@babel/preset-flow": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
-    "@babel/preset-env": "^7.9.0",
-    "flow-copy-source": "^2.0.9"
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
+    "flow-copy-source": "^2.0.9",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "author": "Artem Tyurin <artem.tyurin@gmail.com>",
   "license": "MIT",

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from "react";
-import {PdfHighlighter} from "../../build";
 
 type Props = {
   onMoveAway: () => void,

@@ -1,13 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import 'bulma/css/bulma.css'
-import 'bulma-helpers/css/bulma-helpers.min.css'
-import 'material-design-icons/iconfont/material-icons.css'
+import React from "react";
+import PropTypes from "prop-types";
+import "bulma/css/bulma.css";
+import "bulma-helpers/css/bulma-helpers.min.css";
+import "material-design-icons/iconfont/material-icons.css";
+import Navigation from "./NavigationBar";
 
-import PDF from './RenderPdf'
-import Navigation from './NavigationBar'
-import Loader from './Loader'
-
+/** Несмотря на громкое название, не отображает PDF-файл, а всего лишь рендерит панельку для управления масштабом и поворотом */
 class PDFViewer extends React.Component {
     constructor(props) {
         super(props)

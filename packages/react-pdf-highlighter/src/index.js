@@ -1,11 +1,15 @@
 // @flow
 
-import PdfHighlighter from "./components/PdfHighlighter";
-import Tip from "./components/Tip";
-import Highlight from "./components/Highlight";
-import Popup from "./components/Popup";
-import AreaHighlight from "./components/AreaHighlight";
-import PdfLoader from "./components/PdfLoader";
-import PdfViewer from "./components/PDFViewer";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
 
-export { PdfHighlighter, Tip, Highlight, Popup, AreaHighlight, PdfLoader, PdfViewer };
+function init(props, phrases, root) {
+  if (typeof root === 'string') root = document.querySelector(root);
+  ReactDOM.render(
+    <App {...props}/>,
+    root
+  )
+}
+
+export { init };
