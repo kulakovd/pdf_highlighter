@@ -1,0 +1,13 @@
+.navigation-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: #fafbfc;
+    border: 1px solid #e7e8ec;
+    border-top: none;
+}
+
+.navigation-bar button {
+    background: none;
+    border: none;
+}

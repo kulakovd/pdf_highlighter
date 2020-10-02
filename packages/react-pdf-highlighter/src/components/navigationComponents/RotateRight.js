@@ -2,25 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const RotateRight = ({ css, rotationAngle, handleRotateRight }) => {
-    const rotateRightClass =
-        css ||
-        'button is-black is-marginless has-margin-left-5 has-margin-right-5'
-
-    if (rotationAngle === 180) {
-        return (
-            <button className={rotateRightClass} disabled>
-                <span className='icon is-small'>
-                    <i className='material-icons'>rotate_right</i>
-                </span>
-            </button>
-        )
+    const handleRotate = e => {
+        e.preventDefault();
+        handleRotateRight();
     }
 
     return (
-        <button className={rotateRightClass} onClick={handleRotateRight}>
-            <span className='icon is-small'>
-                <i className='material-icons'>rotate_right</i>
-            </span>
+        <button onClick={handleRotate} disabled={rotationAngle === 180}>
+            <i className='icon app-icons'>rotate_right</i>
         </button>
     )
 }

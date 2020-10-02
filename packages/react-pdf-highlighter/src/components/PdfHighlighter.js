@@ -610,7 +610,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     } = this.props;
 
     return (
-      <Pointable onPointerDown={this.onMouseDown}>
+      // <Pointable onPointerDown={this.onMouseDown}>
         <div
           ref={node => (this.containerNode = node)}
           className="PdfHighlighter"
@@ -669,7 +669,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
             />
           ) : null}
         </div>
-      </Pointable>
+      // </Pointable>
     );
   }
 }

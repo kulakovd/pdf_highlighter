@@ -16,7 +16,7 @@ const updateHash = highlight => {
 
 function Sidebar({ highlights, resetHighlights, removeHighlight }: Props) {
   return (
-    <div className="sidebar" style={{ width: "25vw" }}>
+    <div className="sidebar">
       <div className="description" style={{ padding: "1rem" }}>
         <h2 style={{ marginBottom: "1rem" }}>Ваши комментарии</h2>
         <p>

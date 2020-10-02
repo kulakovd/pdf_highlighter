@@ -146,17 +146,14 @@ class App extends Component<Props, State> {
     const { highlights, rotate, scale } = this.state;
     localStorage.setItem(this.url, JSON.stringify(highlights));
     return (
-      <div
-        className="App"
-        style={{ display: "flex", height: "100vh", backgroundColor: "gray" }}
-      >
+      <div className="App">
         <SplitterLayout secondaryInitialSize={465}>
           <div
             style={{
-              height: "100vh",
-              width: "75vw",
-              overflowY: "scroll",
-              position: "relative"
+              height: "100%",
+              position: "relative",
+              display: "flex",
+              flexDirection: "column"
             }}
           >
             <div className="border rounded">

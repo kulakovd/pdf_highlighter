@@ -1,14 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import NextPageButton from './navigationComponents/NextPageButton'
-import PagesIndicator from './navigationComponents/PagesIndicator'
-import PreviousPageButton from './navigationComponents/PreviousPageButton'
-import ZoomIn from './navigationComponents/ZoomIn'
-import ZoomOut from './navigationComponents/ZoomOut'
-import ResetZoom from './navigationComponents/ResetZoom'
-import RotateLeft from './navigationComponents/RotateLeft'
-import ResetRotation from './navigationComponents/ResetRotation'
-import RotateRight from './navigationComponents/RotateRight'
+import React from "react";
+import PropTypes from "prop-types";
+import ZoomIn from "./navigationComponents/ZoomIn";
+import ZoomOut from "./navigationComponents/ZoomOut";
+import ResetZoom from "./navigationComponents/ResetZoom";
+import RotateLeft from "./navigationComponents/RotateLeft";
+import ResetRotation from "./navigationComponents/ResetRotation";
+import RotateRight from "./navigationComponents/RotateRight";
+import "../style/NavigationBar.css"
 
 const Navigation = ({
     page,
@@ -32,12 +30,11 @@ const Navigation = ({
 }) => {
     return (
         <div
-            className={`columns is-gapless ${css.navbarWrapper ||
-                'box is-mobile has-text-white has-background-black has-margin-top-15 has-margin-bottom-15'}`}>
+            className="navigation-bar">
             {hideZoom ? (
-                <div className='column is-2'></div>
+                <div/>
             ) : (
-                <div className='column is-2 buttons are-small has-addons'>
+                <div>
                     <ZoomOut
                         scale={scale}
                         minScale={minScale}
@@ -60,11 +57,10 @@ const Navigation = ({
                     />
                 </div>
             )}
-            <div className='column'></div>
             {hideRotation ? (
-                <div className='column is-2'></div>
+                <div/>
             ) : (
-                <div className='column is-2 buttons are-small has-addons is-right'>
+                <div>
                     <RotateLeft
                         css={css.rotateLeftBtn}
                         rotationAngle={rotationAngle}

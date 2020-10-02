@@ -2,25 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const ResetRotation = ({ css, rotationAngle, handleResetRotation }) => {
-    const resetRotationClass =
-        css ||
-        'button is-black is-marginless has-margin-left-5 has-margin-right-5'
+    const isDisabled = () => rotationAngle === 0;
 
-    if (rotationAngle === 0) {
-        return (
-            <button className={resetRotationClass} disabled>
-                <span className='icon is-small'>
-                    <i className='material-icons'>refresh</i>
-                </span>
-            </button>
-        )
+    const handleReset = e => {
+        e.preventDefault();
+        handleResetRotation();
     }
 
     return (
-        <button className={resetRotationClass} onClick={handleResetRotation}>
-            <span className='icon is-small'>
-                <i className='material-icons'>refresh</i>
-            </span>
+        <button onClick={handleReset} disabled={isDisabled()}>
+            <i className='icon app-icons'>refresh</i>
         </button>
     )
 }
