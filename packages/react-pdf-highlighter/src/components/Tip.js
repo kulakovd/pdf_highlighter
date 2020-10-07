@@ -33,7 +33,7 @@ class Tip extends Component<Props, State> {
   }
 
   render() {
-    const { onConfirm, onOpen } = this.props;
+    const { onConfirm, onOpen, icons } = this.props;
     const { compact, text, emoji } = this.state;
 
     return (
@@ -69,19 +69,19 @@ class Tip extends Component<Props, State> {
                   }
                 }}
               />
-              <div>
-                {["🔥", "⚠️"].map(_emoji => (
-                  <label key={_emoji}>
+              <div style={{marginTop: 5}}>
+                {icons.map(e => (
+                  <label key={e.name}>
                     <input
-                      checked={emoji === _emoji}
+                      checked={emoji === e.name}
                       type="radio"
                       name="emoji"
-                      value={_emoji}
+                      value={e.name}
                       onChange={event =>
                         this.setState({ emoji: event.target.value })
                       }
                     />
-                    {_emoji}
+                    <i className='icon app-icons' style={{color: e.color}}>{e.icon}</i>
                   </label>
                 ))}
               </div>

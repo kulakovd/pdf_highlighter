@@ -55,7 +55,8 @@ type State<T_HT> = {
   isAreaSelectionInProgress: boolean,
   scrolledToHighlightId: string,
   rotate: number,
-  scale: number
+  scale: number,
+  canCreateHighlight: boolean
 };
 
 type Props<T_HT> = {
@@ -267,7 +268,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
   }
 
   renderHighlights(nextProps?: Props<T_HT>) {
-    const { highlightTransform, highlights, rotate, scale, onSelectionFinished } =
+    const { highlightTransform, highlights, rotate, scale, onSelectionFinished, canCreateHighlight } =
       nextProps || this.props;
 
     this.scale(scale, rotate);
@@ -304,7 +305,7 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
                 );
 
                 // if ghost highlight
-                if (!id) {
+                if (!id && canCreateHighlight) {
                   this.renderTipAtPosition(
                     viewportHighlight.position,
                     onSelectionFinished(

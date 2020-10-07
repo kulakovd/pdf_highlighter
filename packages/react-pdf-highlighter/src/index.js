@@ -4,6 +4,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
 
+window.ReactDOM = ReactDOM;
+
 function init(props, phrases, root) {
   if (typeof root === 'string') root = document.querySelector(root);
   ReactDOM.render(

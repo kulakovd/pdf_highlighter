@@ -35,21 +35,21 @@ class Highlight extends Component<Props> {
       comment,
       isScrolledTo,
       rotate,
-      scale
+      scale,
+      getIcon
     } = this.props;
 
     const { rects, boundingRect } = position;
+    const icon = comment ? getIcon(comment.emoji) : null;
 
     return (
-      <div
-        className={`Highlight ${isScrolledTo ? "Highlight--scrolledTo" : ""}`}
-      >
-        {comment ? (
+      <div className={`Highlight ${isScrolledTo ? "Highlight--scrolledTo" : ""}`}>
+        {icon ? (
           <div
             className="Highlight__emoji"
-            style={getEmojiStyle(boundingRect, rotate)}
+            style={getEmojiStyle(position.boundingRect, rotate)}
           >
-            {comment.emoji}
+            <i className="icon app-icons" style={{color: icon.color}}>{icon.icon}</i>
           </div>
         ) : null}
         <div className="Highlight__parts">

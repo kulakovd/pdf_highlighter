@@ -20,20 +20,17 @@ type Props = {
 
 class AreaHighlight extends Component<Props> {
   render() {
-    const { highlight, onChange, rotate, scale, ...otherProps } = this.props;
+    const { highlight, onChange, rotate, scale, getIcon, ...otherProps } = this.props;
     const { position, comment } = highlight;
+    const icon = comment ? getIcon(comment.emoji) : null;
 
     return (
       <div>
-        {comment ? (
-          <div
-            className="Highlight__emoji"
-            style={getEmojiStyle(position.boundingRect, rotate)}
-          >
-            {comment.emoji}
+        {icon ? (
+          <div className="Highlight__emoji" style={getEmojiStyle(position.boundingRect, rotate)}>
+            <i className="icon app-icons" style={{color: icon.color}}>{icon.icon}</i>
           </div>
-          ) : null
-        }
+        ) : null}
         <Rnd
           className="AreaHighlight"
           disableDragging={true}

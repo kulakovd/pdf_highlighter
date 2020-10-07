@@ -2,19 +2,21 @@
 
 import React from "react";
 import type { T_Highlight } from "../types";
+
 type T_ManuscriptHighlight = T_Highlight;
 
 type Props = {
   highlights: Array<T_ManuscriptHighlight>,
   resetHighlights: () => void,
-    removeHighlight: (highlight: T_ManuscriptHighlight) => void
+  removeHighlight: (highlight: T_ManuscriptHighlight) => void,
+  canRemoveHighlight:  (highlight: T_ManuscriptHighlight) => boolean,
 };
 
 const updateHash = highlight => {
   document.location.hash = `highlight-${highlight.id}`;
 };
 
-function Sidebar({ highlights, resetHighlights, removeHighlight }: Props) {
+function Sidebar({ highlights, resetHighlights, removeHighlight, canRemoveHighlight }: Props) {
   return (
     <div className="sidebar">
       <div className="description" style={{ padding: "1rem" }}>
@@ -37,30 +39,32 @@ function Sidebar({ highlights, resetHighlights, removeHighlight }: Props) {
             }}
           >
             <div>
-              <strong>{highlight.comment.text}</strong>
+              <div style={{display: "flex", justifyContent: "space-between"}}>
+                <strong>{highlight.comment.text}</strong>
+                <button
+                  style={{border: "none", background: "none"}}
+                  disabled={!canRemoveHighlight(highlight)}
+                  onClick={e => {
+                    e.preventDefault();
+                    removeHighlight(highlight);
+                  }}>
+                  <i className="icon app-icons">delete</i>
+                </button>
+              </div>
               {highlight.content.text ? (
                 <blockquote style={{ marginTop: "0.5rem" }}>
                   {`${highlight.content.text.slice(0, 90).trim()}…`}
                 </blockquote>
               ) : null}
               {highlight.content.image ? (
-                  <div>
-
-                        <div
-                         className="highlight__image"
-                        style={{ marginTop: "0.5rem" }}
-                        >
-                            <img src={highlight.content.image} alt={"Screenshot"} />
-                        </div>
+                <div>
+                  <div className="highlight__image" style={{ marginTop: "0.5rem" }}>
+                    <img src={highlight.content.image} alt={"Screenshot"} />
                   </div>
+                </div>
 
               ) : null}
             </div>
-              <div>
-                  <button onClick={() => {
-                      removeHighlight(highlight);
-                  }}>Remove</button>
-              </div>
             <div className="highlight__location">
               Страница {highlight.position.pageNumber}
             </div>
