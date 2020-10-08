@@ -33,7 +33,7 @@ class Tip extends Component<Props, State> {
   }
 
   render() {
-    const { onConfirm, onOpen, icons } = this.props;
+    const { onConfirm, onOpen, icons, phrases } = this.props;
     const { compact, text, emoji } = this.state;
 
     return (
@@ -45,9 +45,7 @@ class Tip extends Component<Props, State> {
               onOpen();
               this.setState({ compact: false });
             }}
-          >
-            Добавить комментарий
-          </div>
+          >{phrases.ADD_COMMENT}</div>
         ) : (
           <form
             className="Tip__card"
@@ -59,7 +57,7 @@ class Tip extends Component<Props, State> {
             <div>
               <textarea
                 width="100%"
-                placeholder="Ваш комментарий"
+                placeholder={phrases.YOUR_COMMENT}
                 autoFocus
                 value={text}
                 onChange={event => this.setState({ text: event.target.value })}
@@ -87,7 +85,7 @@ class Tip extends Component<Props, State> {
               </div>
             </div>
             <div>
-              <input type="submit" value="Сохранить" />
+              <input type="submit" value={phrases.ADD} />
             </div>
           </form>
         )}

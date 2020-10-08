@@ -6,7 +6,7 @@ import App from "./components/App";
 
 window.ReactDOM = ReactDOM;
 
-function init(props, phrases, root) {
+function init(props, root) {
   if (typeof root === 'string') root = document.querySelector(root);
   ReactDOM.render(
     <App {...props}/>,

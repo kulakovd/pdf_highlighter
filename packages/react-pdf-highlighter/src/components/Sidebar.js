@@ -16,16 +16,13 @@ const updateHash = highlight => {
   document.location.hash = `highlight-${highlight.id}`;
 };
 
-function Sidebar({ highlights, resetHighlights, removeHighlight, canRemoveHighlight }: Props) {
+function Sidebar({ highlights, resetHighlights, removeHighlight, canRemoveHighlight, phrases }: Props) {
   return (
     <div className="sidebar">
       <div className="description" style={{ padding: "1rem" }}>
-        <h2 style={{ marginBottom: "1rem" }}>Ваши комментарии</h2>
+        <h2 style={{ marginBottom: "1rem" }}>{phrases.COMMENTS_ON_THE_DOCUMENT}</h2>
         <p>
-          <small>
-            Для выделения области на документе нажмите и удерживайте кнопку Alt
-            во время выделения
-          </small>
+          <small>{phrases.HOLD_THE_ALT_BUTTON_TO_SPECIFY_THE_AREA}</small>
         </p>
       </div>
 
@@ -42,6 +39,7 @@ function Sidebar({ highlights, resetHighlights, removeHighlight, canRemoveHighli
               <div style={{display: "flex", justifyContent: "space-between"}}>
                 <strong>{highlight.comment.text}</strong>
                 <button
+                  title={phrases.DELETE}
                   style={{border: "none", background: "none"}}
                   disabled={!canRemoveHighlight(highlight)}
                   onClick={e => {
@@ -66,14 +64,14 @@ function Sidebar({ highlights, resetHighlights, removeHighlight, canRemoveHighli
               ) : null}
             </div>
             <div className="highlight__location">
-              Страница {highlight.position.pageNumber}
+              {phrases.PAGE} {highlight.position.pageNumber}
             </div>
           </li>
         ))}
       </ul>
       {highlights.length > 0 ? (
         <div style={{ padding: "1rem" }}>
-          <button onClick={resetHighlights}>Сбросить</button>
+          <button onClick={resetHighlights}>{phrases.CLEAR_ALL}</button>
         </div>
       ) : null}
     </div>

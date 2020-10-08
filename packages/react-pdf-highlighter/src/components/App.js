@@ -216,6 +216,7 @@ class App extends Component<Props, State> {
 
                         hideTipAndSelection();
                       }}
+                      phrases={this.props.phrases}
                     />
                   )}
                   highlightTransform={(
@@ -283,6 +284,7 @@ class App extends Component<Props, State> {
             canRemoveHighlight={this.canRemoveHighlight}
             rotate={this.rotate}
             scale={this.scale}
+            phrases={this.props.phrases}
           />
         </SplitterLayout>
       </div>
