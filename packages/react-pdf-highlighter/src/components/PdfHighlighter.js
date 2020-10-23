@@ -404,12 +404,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
   scrollTo = (highlight: T_Highlight) => {
     const { pageNumber, boundingRect, usePdfCoordinates } = highlight.position;
-
     this.viewer.container.removeEventListener("scroll", this.onScroll);
-
     const pageViewport = this.viewer.getPageView(pageNumber - 1).viewport;
-
-    // console.log("pageview:" + JSON.stringify(this.viewer.getPageView(pageNumber - 1).pageViewport.height))
     const scrollMargin = 10;
 
     const currentScaleValue = +this.viewer.currentScaleValue;
@@ -424,17 +420,8 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
 
     const x = stv.left - scrollMargin;
     const y = stv.top - scrollMargin;
-    let convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
-    if (pagesRotation === undefined || pagesRotation === 0) {
-      convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
-    } else if (pagesRotation === 90 || pagesRotation === -90) {
-      convertToPdfPoint = pageViewport.convertToPdfPoint(y, x);
-    } else if (pagesRotation === -180 || pagesRotation === 180) {
-      // debugger;
-      // let height = this.viewer.getPageView(pageNumber - 1).pageViewport.height;
-      // console.log("height:" + height)
-      convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
-    }
+
+    const convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
 
     this.viewer.scrollPageIntoView({
       pageNumber,
