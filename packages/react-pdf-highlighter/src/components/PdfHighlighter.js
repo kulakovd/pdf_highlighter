@@ -412,17 +412,18 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
     // console.log("pageview:" + JSON.stringify(this.viewer.getPageView(pageNumber - 1).pageViewport.height))
     const scrollMargin = 10;
 
-    let currentScaleValue = +this.viewer.currentScaleValue;
-    let pagesRotation = this.viewer.pagesRotation;
-    let x = 0;
-    let y =
-      scaledToViewport(
-        boundingRect,
-        pageViewport,
-        currentScaleValue,
-        pagesRotation,
-        usePdfCoordinates
-      ).top - scrollMargin;
+    const currentScaleValue = +this.viewer.currentScaleValue;
+    const pagesRotation = this.viewer.pagesRotation;
+    const stv = scaledToViewport(
+      boundingRect,
+      pageViewport,
+      currentScaleValue,
+      pagesRotation,
+      usePdfCoordinates
+    );
+
+    const x = stv.left - scrollMargin;
+    const y = stv.top - scrollMargin;
     let convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
     if (pagesRotation === undefined || pagesRotation === 0) {
       convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
@@ -433,42 +434,6 @@ class PdfHighlighter<T_HT: T_Highlight> extends PureComponent<
       // let height = this.viewer.getPageView(pageNumber - 1).pageViewport.height;
       // console.log("height:" + height)
       convertToPdfPoint = pageViewport.convertToPdfPoint(x, y);
-    }
-
-    let offset = 0;
-    // Deprecated
-    switch (pagesRotation) {
-      case 0:
-        offset = [
-          boundingRect.x1,
-          boundingRect.height - boundingRect.y1 - scrollMargin
-        ];
-        break;
-      case 90:
-        offset = [
-          boundingRect.x1 - 150, //150 - offset page with header height
-          boundingRect.height - boundingRect.y1
-        ];
-
-        break;
-      case -180:
-        offset = [
-          boundingRect.width - boundingRect.x2,
-          boundingRect.height - boundingRect.y2 - boundingRect.height / 2
-        ];
-        break;
-      case 180:
-        offset = [
-          boundingRect.width - boundingRect.x2,
-          boundingRect.height - boundingRect.y2 - boundingRect.height / 2
-        ];
-        break;
-      case -90:
-        offset = [
-          boundingRect.x2, //150 - offset page with header height
-          boundingRect.height - boundingRect.y1
-        ];
-        break;
     }
 
     this.viewer.scrollPageIntoView({

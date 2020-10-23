@@ -9,10 +9,29 @@
 <script src="dist/pdf-highlighter.js"></script>
 <script>
   const url = "https://arxiv.org/pdf/1708.08021.pdf";
-  PdfHighlighter.init({
+  c60.widgets.pdfAnnotator.init({
     url: url,
-    annotations: localStorage[url],
-    saveAnnotations: a => localStorage[url] = a
-  }, {}, '#root');
+    canCreateAnnotations: true,
+    loadAnnotations: () => localStorage[url] || '[]',
+    saveAnnotations: a => localStorage[url] = a,
+    icons: [],
+    phrases: {
+      COMMENTS_ON_THE_DOCUMENT: "Комментарии к документу",
+      TURN: "Повернуть",
+      RETURN_POSITION: "Вернуть положение",
+      HOLD_THE_ALT_BUTTON_TO_SPECIFY_THE_AREA: "Для указания области удерживайте кнопку Alt",
+      CLEAR_ALL: "Очистить все",
+      DELETE: "Удалить",
+      PAGE: "Страница",
+      ADD_COMMENT: "Добавить комментарий",
+      ADD: "Добавить",
+      YOUR_COMMENT: "Ваш комментарий",
+      INFORMATION: "Информация",
+      WARNING: "Предупреждение",
+      ERROR: "Ошибка",
+      CRITICAL_ERROR: "Критичная ошибка",
+    }
+  }, '#root');
 </script>
+</body>
 </html>

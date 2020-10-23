@@ -12,11 +12,14 @@ type Props = {
   canRemoveHighlight:  (highlight: T_ManuscriptHighlight) => boolean,
 };
 
-const updateHash = highlight => {
-  document.location.hash = `highlight-${highlight.id}`;
-};
-
-function Sidebar({ highlights, resetHighlights, removeHighlight, canRemoveHighlight, phrases }: Props) {
+function Sidebar({
+   highlights,
+   resetHighlights,
+   removeHighlight,
+   canRemoveHighlight,
+   phrases,
+   onHighlightClick = () => {}
+}: Props) {
   return (
     <div className="sidebar">
       <div className="description" style={{ padding: "1rem" }}>
@@ -32,7 +35,7 @@ function Sidebar({ highlights, resetHighlights, removeHighlight, canRemoveHighli
             key={index}
             className="sidebar__highlight"
             onClick={() => {
-              updateHash(highlight);
+              onHighlightClick(highlight);
             }}
           >
             <div>

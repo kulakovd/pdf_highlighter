@@ -103,22 +103,6 @@ class App extends Component<Props, State> {
 
   scrollViewerTo = (highlight: any) => {};
 
-  scrollToHighlightFromHash = () => {
-    const highlight = this.getHighlightById(parseIdFromHash());
-
-    if (highlight) {
-      this.scrollViewerTo(highlight);
-    }
-  };
-
-  componentDidMount() {
-    window.addEventListener(
-      "hashchange",
-      this.scrollToHighlightFromHash,
-      false
-    );
-  }
-
   getHighlightById = (id: string) => {
     const { highlights } = this.state;
 
@@ -199,8 +183,6 @@ class App extends Component<Props, State> {
                   onScrollChange={resetHash}
                   scrollRef={scrollTo => {
                     this.scrollViewerTo = scrollTo;
-
-                    this.scrollToHighlightFromHash();
                   }}
                   onSelectionFinished={(
                     position,
@@ -285,6 +267,7 @@ class App extends Component<Props, State> {
             rotate={this.rotate}
             scale={this.scale}
             phrases={this.props.phrases}
+            onHighlightClick={h => this.scrollViewerTo(h)}
           />
         </SplitterLayout>
       </div>
